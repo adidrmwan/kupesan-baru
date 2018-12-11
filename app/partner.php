@@ -32,8 +32,13 @@ class Partner extends Model
         'close_hour',
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('User');
+    }
+
+    public function photographerpackage()
+    {
+        return $this->hasMany('PhotographerPackage');
     }
 }
