@@ -66,14 +66,37 @@
                         </div>
                         
                         <div id="fotografer" class="tab-pane" style="border-radius: 15px;">
-                            <form>
+                            <form role="form" action="{{ route('search.fotostudio') }}" method="post" enctype="multipart/form-data">
+                            {{ csrf_field() }}
                                 <div class="row">
                                     <h4 style="text-align: center; margin-top: -20px;" class="info-mobile-header">Fotografer</h4>
-                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5" style="float: none; margin: 0 auto; display: block; position: relative; text-align: center;">
-                                        <h1>Coming Soon</h1>        
-                                    </div><!-- end columns -->
-                                    
-                                </div><!-- end row -->
+                                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-1"></div>
+                                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                        <div class="form-group right-icon" >
+                                            <select  class="form-control" name="tag_id" required>
+                                                <option selected value="">Pilih Tema</option>
+                                                <option value="all">Semua</option>
+                                                @foreach($tag as $list)
+                                                <option value="{{$list->id}}">{{$list->type_name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>                         
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                        <div class="form-group right-icon ">
+                                            <select  class="form-control" name="kota" required>
+                                                <option selected value="">Pilih Kota</option>
+                                                <option value="0">Kota Surabaya</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>                         
+                                    </div>                       
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 search-btn">
+                                        <button type="submit" class="btn btn-orange"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Search</button>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-1"></div>
+                                </div>
                             </form>
                         </div>
 
