@@ -290,6 +290,40 @@
           width: "100%"
         });
     </script>
+    <script type="text/javascript">
+      var tags = $('#tags-photographer');
+        $(tags).select2({
+          data:[
+            {id:1,text:"Wedding/Pre-Wedding"},
+            {id:2,text:"Fashion"},
+            {id:3,text:"Food"},
+            {id:4,text:"Event"},
+            {id:5,text:"Travel/Holiday"},
+            {id:6,text:"Birthday"},
+            {id:7,text:"Baby"},
+            {id:8,text:"Company Profile"},
+            {id:9,text:"Graduation"},
+            {id:10,text:"Commercial"},
+            // {id:11,text:"Colorful"},
+            // {id:12,text:"Monochrome"},
+            // {id:13,text:"Nature"},
+            // {id:14,text:"Caribbean"},
+            // {id:15,text:"Cosplay"},
+            // {id:16,text:"Tradisional"},
+            // {id:17,text:"Horor"},
+            // {id:18,text:"Pantai"},
+            // {id:19,text:"Hutan"},
+            // {id:20,text:"Minimalis"},
+            // {id:21,text:"Shabby Chic"},
+            // {id:22,text:"Mediteranian"},
+            // {id:23,text:"Bohemian"},
+            // {id:24,text:"Outdoor"},
+          ],
+          multiple: true,
+          placeholder: "Pilih Paket Tag",
+          width: "100%"
+        });
+    </script>
     @yield('script')
 </body>
 </html>

@@ -8,14 +8,14 @@
                 <div class="bd-example bd-example-tabs">
                     <nav class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#daftarBooking" role="tab" aria-controls="home" aria-expanded="true">Detail Bisnis</a>
-                        <!-- <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#ukuran" role="tab" aria-controls="profile" aria-expanded="false">Panduan Ukuran</a> -->
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#tnc" role="tab" aria-controls="profile" aria-expanded="false">Syarat dan ketentuan</a>
+                        <!-- <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#jadwalBooking" role="tab" aria-controls="profile" aria-expanded="false">Fasilitas</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#tnc" role="tab" aria-controls="profile" aria-expanded="false">Syarat dan ketentuan</a> -->
                     </nav>
                 </div>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade active show" id="daftarBooking" role="tabpanel" aria-labelledby="nav-home-tab" aria-expanded="true">
                         <div class="card">
-                              <form role="form" action="{{ route('kebaya.profile.submit') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                              <form role="form" action="{{ route('pg.profile.update') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                               {{ csrf_field() }}
                               <div class="row">
                                   <div class="col-md-7">
@@ -25,17 +25,24 @@
                                     </div>
                                     <div class="content">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Nama Usaha</label>
                                                         <input type="text" class="form-control" value="{{$partner->pr_name}}" disabled>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Kategori usaha</label>
                                                             <input type="text" class="form-control" placeholder="Nama Usaha"
-                                                          value="{{$tipe->type_name}}" disabled>
+                                                          value="{{$type->type_name}}" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Sub Kategori</label>
+                                                            <input type="text" class="form-control" placeholder="Nama Usaha"
+                                                          value="{{$subkategori->type_name}}" disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,7 +146,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Telepon/HP (1)<small><b style="color: red;"> *</b></small></label>
-                                                      <input type="text" class="form-control" placeholder="Telepon/HP" aria-label="Username" aria-describedby="basic-addon1" name="pr_phone" value="{{$phone_number}}" required>
+                                                      <input type="text" class="form-control" placeholder="Telepon/HP" aria-label="Username" aria-describedby="basic-addon1" name="pr_phone" value="{{$partner->pr_phone}}" required>
                                                       <div class="invalid-feedback">
                                                           Silahkan isi no. telepon aktif.
                                                       </div>
@@ -148,7 +155,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Telepon/HP (2)</label>
-                                                      <input type="text" class="form-control" placeholder="Telepon/HP" aria-label="Username" name="pr_phone2" aria-describedby="basic-addon1">
+                                                      <input type="text" class="form-control" placeholder="Telepon/HP" aria-label="Username" name="pr_phone2" value="{{$partner->pr_phone2}}" aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
                                         </div>
@@ -159,28 +166,28 @@
                                     </div>
                                     <div class="content">
                                         @if(empty($partner->pr_logo))
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="alert alert-warning" style="text-align: center;">
-                                                        Upload logo usaha Anda di sini<br>dalam format file: JPG, JPEG, atau PNG. <br>
-                                                        Maximum size: 512 KB dan <b>Rasio 1:1</b>
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-warning" style="text-align: center;">
+                                                    Upload logo usaha Anda di sini<br>dalam format file: JPG, JPEG, atau PNG. <br>
+                                                    Maximum size: 512 KB dan <b>Rasio 1:1</b>
                                                 </div>
                                             </div>
+                                        </div>
                                             <img style="height: 200px; width: auto; margin:0 auto; position:relative; float:none; display:block;border-radius: 100%;" class="img-responsive" src="{{asset('dist/images/upload-logo-sp.png')  }}" alt= "logo" />
                                         @else
                                             @if(File::exists(public_path("logo/".$partner->pr_logo.".jpg")))
-                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.jpg')  }}" class="img-responsive" alt="about-img" style="height: 200px; max-width: 100%; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
+                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.jpg')  }}" class="img-responsive" alt="logo" style="height: 200px; width: auto; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
                                             @elseif(File::exists(public_path("logo/".$partner->pr_logo.".png")))
-                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.png')  }}" class="img-responsive" alt="about-img" style="height: 200px;max-width: 100%; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
+                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.png')  }}" class="img-responsive" alt="logo" style="height: 200px; width: auto; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
                                             @elseif(File::exists(public_path("logo/".$partner->pr_logo.".jpeg")))
-                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.jpeg')  }}" class="img-responsive" alt="about-img" style="height: 200px; max-width: 100%; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
+                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.jpeg')  }}" class="img-responsive" alt="logo" style="height: 200px; width: auto; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
                                             @elseif(File::exists(public_path("logo/".$partner->pr_logo.".JPG")))
-                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.JPG')  }}" class="img-responsive" alt="about-img" style="height: 200px; max-width: 100%; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
+                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.JPG')  }}" class="img-responsive" alt="logo" style="height: 200px; width: auto; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
                                             @elseif(File::exists(public_path("logo/".$partner->pr_logo.".PNG")))
-                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.PNG')  }}" class="img-responsive" alt="about-img" style="height: 200px; max-width: 100%; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
+                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.PNG')  }}" class="img-responsive" alt="logo" style="height: 200px; width: auto; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
                                             @elseif(File::exists(public_path("logo/".$partner->pr_logo.".JPEG")))
-                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.JPEG')  }}" class="img-responsive" alt="about-img" style="height: 200px; max-width: 100%; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
+                                            <img src="{{ asset('logo/'.$partner->pr_logo.'.JPEG')  }}" class="img-responsive" alt="logo" style="height: 200px; width: auto; margin: 0 auto; float: none; display: block;position: relative; border-radius: 100%;" />
                                             @else
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -219,50 +226,11 @@
                     </div>
                     <div class="tab-pane fade" id="tnc" role="tabpanel" aria-labelledby="nav-profile-tab" aria-expanded="false">
                         <div class="card">
-                            <form role="form" action="{{ route('kebaya.tnc.submit') }}" method="post" enctype="multipart/form-data">
+                            <form role="form" action="{{ route('update.tnc') }}" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
-                                <div class="header">
-                                     <h4 class="title">Syarat dan Ketentuan</h4>
-                                 </div>
-                                 <div class="content">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            @foreach($tnc as $key => $data)
-                                            <p>{{$key+1}}. {{$data->tnc_desc}} 
-                                                <a href="{{route('kebaya.delete.tnc', ['id' => $data->id])}}" class="btn btn-info btn-sm pull-right">Delete</a>
-                                            </p> 
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Silahkan isi Syarat dan Ketentuan</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <button type="button" class="btn btn-info addService">Add More</button>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <input type="text" class="form-control" name="tnc[]" placeholder="Syarat dan Ketentuan">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="content">
-                                                <button type="submit" class="btn btn-block btn-info pull-right">Submit</button>
-                                                <div class="clearfix"></div> 
-                                            </div>  
-                                        </div>
-                                      </div>
-                                 </div>
+                                @include('partner.ps.tnc')
                             </form>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="ukuran" role="tabpanel" aria-labelledby="nav-profile-tab" aria-expanded="false">
-                        @include('partner.kebaya.panduan-ukuran')
                     </div>
                 </div>
             </div>
@@ -274,7 +242,7 @@
 @section('script')
 <script type="text/javascript">
 $(document).on('click', '.addService', function(){
-    var html = '<input type="text" class="form-control" name="tnc[]" placeholder="Syarat dan Ketentuan">';
+    var html = '<div class="row"><div class="col-md-12"><input type="text" class="form-control" name="tnc[]" placeholder="Syarat dan Ketentuan"></div></div>';
   $(this).parent().append(html);
 });
 </script>

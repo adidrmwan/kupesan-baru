@@ -48,39 +48,10 @@ Route::post('/search/busana', 'SearchController@searchKebaya')->name('search.keb
 //Search at navigation box
 Route::post('/search', 'SearchController@searchData')->name('search.data');
 
-// Route untuk user yang admin
-Route::group(['prefix' => 'admin-kupesan', 'middleware' => ['auth','role:superadmin']], function(){
-	Route::get('/', 'AdminController@dashboard')->name('admin.dashboard');
-    Route::get('/kupesan', 'SearchController@home')->name('admin.kupesan');
-    Route::get('/approve/booking', 'AdminController@approveBooking')->name('approve.booking');
-    Route::get('/cancel/booking', 'AdminController@cancelBooking')->name('cancel.booking');
-    Route::get('/confirm/bukti', 'AdminController@confirmBukti')->name('confirm.bukti');
-    Route::get('/cancel/bukti', 'AdminController@cancelBukti')->name('cancel.bukti');
-    Route::get('/show/bukti', 'AdminController@showBukti')->name('show.bukti');
-    Route::get('/partner-list', 'AdminController@partnerList')->name('daftar.partner');
-    Route::get('/confirm/partner', 'AdminController@confirmPartner')->name('confirm.partner');
-    Route::get('/show/partner', 'AdminController@showPartner')->name('show.partner');
-    Route::get('/cancel/partner', 'AdminController@cancelPartner')->name('cancel.partner');
-
-    // kebaya
-    Route::get('/busana/approve/booking', 'AdminController@approveBookingKebaya')->name('kebaya.approve.booking');
-    Route::get('/busana/cancel/booking', 'AdminController@cancelBookingKebaya')->name('kebaya.cancel.booking');
-    Route::get('/busana/confirm/bukti', 'AdminController@confirmBuktiKebaya')->name('kebaya.confirm.bukti');
-    Route::get('/busana/cancel/bukti', 'AdminController@cancelBuktiKebaya')->name('kebaya.cancel.bukti');
-    Route::get('busana//show/bukti', 'AdminController@showBuktiKebaya')->name('kebaya.show.bukti');
-    Route::get('/busanalist/booking', 'AdminController@listBookingKebaya')->name('list.booking.kebaya');
-    
-    //spot foto
-    Route::get('/spotfoto-free/all', 'AdminController@showAllFreeSpot')->name('show.free.spot');
-    Route::get('/spotfoto-free/add', 'AdminController@addFreeSpot')->name('add.free-spot');
-    Route::post('/spotfoto-free/store', 'AdminController@storeFreeSpot')->name('store.free-spot');
-    Route::get('/spotfoto/delete', 'AdminController@cancelPartner')->name('cancel.free.spot');
-    
-    Route::get('/spot/all', 'AdminController@showAllPartnerSpot')->name('show.partner.spot');
-    Route::get('/spot/add', 'AdminController@addPartnerSpot')->name('add.partner-spot');
-    Route::post('/spot/store', 'AdminController@storePartnerSpot')->name('store.partner-spot');
-
-});
+// ADMIN ROUTE
+Route::prefix('admin-kupesan')->group(base_path('routes/admin-kupesan.php'));
+// PARTNER ROUTE
+Route::prefix('partner')->group(base_path('routes/partner.php'));
 
 // Route untuk email verification
 Route::get('/user/activation/{token}', 'Auth\RegisterController@userActivation');
@@ -129,90 +100,7 @@ Route::group(['prefix' => '2', 'middleware' => ['auth','role:user']], function()
 });
 Route::get('/booking/kebaya/1', 'KebayaBookingController@step1')->name('kebaya.step1');
 Route::get('/booking/ps/1', 'BookingController@step1')->name('ask.page');
-// Role untuk user yang partner
-Route::group(['prefix' => 'partner', 'middleware' => ['auth','role:partner']], function(){
 
-    Route::get('/', 'partnerController@dashboard')->name('partner.dashboard');
-
-    Route::get('/form/new', 'PartnerController@showDetailMitra')->name('partner.profile.form');
-    Route::post('/form/new', 'PartnerController@submitDetailMitra')->name('partner.profile.form.submit');
-    
-    Route::get('/form/facilities', 'PartnerController@showFormFacilities')->name('partner.facilities.form');
-    Route::post('/form/facilities', 'PartnerController@submitFormFacilities')->name('partner.facilities.form.submit');
-    Route::get('/form/dayoff', 'PartnerController@showFormDayOff')->name('form.dayoff');
-    Route::post('/form/dayoff', 'PartnerController@submitFormDayOff')->name('form.dayoff.submit');
-
-    // fotostudio
-    Route::get('/booking/ps/schedule', 'PartnerController@showBookingSchedule')->name('booking.schedule');
-    Route::get('/booking/ps/history', 'PartnerController@showBookingHistory')->name('booking.history');
-    Route::get('/booking/offline/1', 'PartnerController@showStep1')->name('form.offline');
-    Route::get('/booking/offline/1/2', 'PartnerController@showStep2')->name('form.offline.step2');
-    Route::post('/booking/offline/1/2', 'PartnerController@submitStep2')->name('form.offline.step2.submit');
-    Route::post('/booking/offline/1/3', 'PartnerController@submitStep3')->name('form.offline.step3.submit');
-    Route::post('/booking/offline/1/4', 'PartnerController@submitStep4')->name('form.offline.step4.submit');
-    Route::post('/booking/offline', 'PartnerController@submitFormOffline')->name('form.offline.submit');
-
-    Route::get('/profile/ps', 'PartnerController@profile')->name('partner.profile');
-    
-    Route::get('/booking/detail', 'PartnerController@showDetailBooking')->name('detail.booking');
-
-    Route::get('/portofolio', 'AlbumController@showAlbumPortofolio')->name('partner.portofolio');
-    Route::post('/portofolio/upload', 'AlbumController@uploadAlbum')->name('partner.upload.portofolio');
-    Route::post('/portofolio/update', 'AlbumController@updateAlbum')->name('partner.update.portofolio');
-
-    Route::post('/booking/completed', 'BookingController@orderCompleted')->name('order.completed');
-
-    Route::post('/profile/edit', 'PartnerController@submitEditProfile')->name('partner.profile.form.edit');
-    Route::post('/profile/fasilitas', 'AlbumController@updateFasilitas')->name('update.fasilitas');
-    Route::post('/profile/tnc', 'PartnerController@updateTNC')->name('update.tnc');
-    Route::get('/profile/tnc/delete', 'PartnerController@deleteTNC')->name('delete.tnc');
-    Route::post('/profile/upload/logo', 'PartnerController@uploadLogo')->name('partner.upload.logo');
-    Route::get('/booking/ps/finished', 'PartnerController@bookingFinished')->name('booking.finished');
-    Route::get('/booking/ps/cancel', 'PartnerController@bookingCancel')->name('booking.cancel');
-    Route::get('/approve/booking', 'AdminController@approveBooking')->name('sp.approve.booking');
-    Route::get('/cancel/booking', 'AdminController@cancelBooking')->name('sp.cancel.booking');
-
-    // fotostudio paket
-    Route::get('/ps/package/add', 'PackageController@showAddPackage')->name('partner.addpackage');
-    Route::post('/ps/package/add', 'PackageController@addPackage')->name('partner.addpackage.submit');
-    Route::get('/ps/package/list', 'PackageController@listPackage')->name('partner.listpackage');
-    Route::post('/ps/package/edit', 'PackageController@showEditPackage')->name('partner.editpackage');
-    Route::post('/ps/package/update', 'PackageController@editPackage')->name('partner.editpackage.submit');
-    Route::post('/ps/package/delete', 'PackageController@deletePackage')->name('partner.deletepackage');
-    Route::get('/ps/package/update/{$id}', 'PartnerController@UpdatePackagePartner')->name('partner-updatepackage-button');
-    Route::get('/ps/package/duration/delete', 'PackageController@deleteDurasi')->name('durasi.delete');
-
-    // Kebaya
-    Route::resource('kebaya-package', 'KebayaPackageController');
-    Route::get('kebaya-package/biaya/delete', 'KebayaPackageController@deleteBiayaSewa')->name('kebaya.delete.biaya');
-    Route::get('/kebaya-package/action/non-active', 'KebayaPackageController@setNonActive')->name('set.nonactive');
-    Route::get('/kebaya-package/action/active', 'KebayaPackageController@setActive')->name('set.active');
-
-    Route::get('/profile/4', 'KebayaController@profile')->name('kebaya.profile');
-    Route::post('/profile/4', 'KebayaController@submitEditProfile')->name('kebaya.profile.submit');
-    Route::post('/profile/tnc/4', 'KebayaController@updateTNC')->name('kebaya.tnc.submit');
-    Route::get('/profile/tnc/delete/4', 'KebayaController@deleteTNC')->name('kebaya.delete.tnc');
-    Route::get('/booking/offline/4/1', 'KebayaController@showStep1')->name('kebaya.off-booking');
-    Route::get('/booking/offline/4/2', 'KebayaController@showStep2')->name('kebaya.off-booking.step2');
-    Route::post('/booking/offline/4/2', 'KebayaController@submitStep2')->name('kebaya.off-booking.step2.submit');
-    Route::get('/booking/offline/4/3', 'KebayaController@showStep3')->name('kebaya.off-booking.step3');
-    Route::post('/booking/offline/4/3', 'KebayaController@submitStep3')->name('kebaya.off-booking.step3.submit');
-    Route::post('/booking/offline/4/4', 'KebayaController@submitStep4')->name('kebaya.off-booking.step4.submit');
-    Route::get('/booking/schedule/4', 'KebayaController@showBookingSchedule')->name('kebaya.schedule');
-    Route::get('/booking/history/4', 'KebayaController@showBookingHistory')->name('kebaya.history');
-    Route::get('/booking/cancel', 'KebayaController@bookingCancel')->name('kebaya.booking.cancel');
-    Route::get('/booking/finished', 'KebayaController@bookingFinished')->name('kebaya.booking.finished');
-    Route::get('/booking/finished/online', 'KebayaController@bookingFinishedOnline')->name('kebaya.booking.finished.online');
-    Route::post('/profile/panduan-ukuran/update', 'KebayaController@updatePU')->name('kebaya.update.pu');
-    Route::get('/profile/panduan-ukuran/delete', 'KebayaController@deletePU')->name('kebaya.delete.pu');
-    Route::get('/booking/detail/4', 'KebayaController@showDetailBooking')->name('detail.booking.kebaya');
-    Route::get('/approve/booking/4', 'AdminController@approveBookingKebaya')->name('partner.approve.booking');
-    Route::get('/cancel/booking/4', 'AdminController@cancelBookingKebaya')->name('partner.cancel.booking');
-    
-    
-    Route::get('/form/dayoff/4', 'KebayaController@showFormDayOff')->name('kebaya.form.dayoff');
-    Route::post('/form/dayoff/4', 'KebayaController@submitFormDayOff')->name('kebaya.form.dayoff.submit');
-});
 
 //Route untuk studio foto
 Route::get('/studio/detail', 'StudioController@studiodetail')->name('studio-detail');
@@ -276,4 +164,6 @@ Route::get('/json-village1', 'BookingController@villages');
 Route::get('/json-village2', 'BookingController@villages2');
 
 Route::get('/json-regencies3', 'KebayaBookingController@regencies3');
+
+
 

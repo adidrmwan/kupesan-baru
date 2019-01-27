@@ -39,9 +39,20 @@ class CountryController extends Controller
     public function regencies4(){
       $provinces_id = Input::get('province_id');
       if($provinces_id == '1'){
-          $regencies = DB::table('partner_type')->where('id', '5')->orWhere('id', '6')->orWhere('id', '7')->orWhere('id', '8')->get();
-      } else {
-          $regencies = DB::table('partner_type')->where('id', '4')->get();
+        //Spot Foto
+        $regencies = DB::table('partner_type')->where('id', '5')->orWhere('id', '6')->orWhere('id', '7')->orWhere('id', '8')->get();
+      } 
+      if ($provinces_id == '2') {
+        //Fotografer
+        $regencies = DB::table('partner_type')->where('id', '2')->get();
+      } 
+      if ($provinces_id == '3') {
+        //MUA
+        $regencies = DB::table('partner_type')->where('id', '3')->get();
+      } 
+      if ($provinces_id == '4') {
+        //Busana
+        $regencies = DB::table('partner_type')->where('id', '4')->get();
       }
       
       return response()->json($regencies);

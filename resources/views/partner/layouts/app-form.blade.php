@@ -266,7 +266,13 @@
           if (province_id == 1) {
             $('#regencies4').empty();
             $('#regencies4').append('<option value="" disable="true" selected="true">Pilih Sub Kategori</option>');
-          } else if (province_id == 4) {
+          } else if (province_id == 2) {
+            $('#regencies4').empty();
+            $('#regencies4').append('<option value="" disable="true" selected="true">Pilih Sub Kategori</option>');
+          }else if (province_id == 3) {
+            $('#regencies4').empty();
+            $('#regencies4').append('<option value="" disable="true" selected="true">Pilih Sub Kategori</option>');
+          }else if (province_id == 4) {
             $('#regencies4').empty();
             $('#regencies4').append('<option value="" disable="true" selected="true">Pilih Sub Kategori</option>');
           }

@@ -42,11 +42,14 @@
                 
                 @elseif($partner->status == '1')
                     @if(!empty($partner->pr_name))
-                        <!-- kebaya -->
-                        @if($partner->pr_type == '4')
-                            @include('partner.layouts.sidebar-kebaya')
-                        @elseif($partner->pr_type == '1')
+                        @if($partner->pr_type == '1')
                             @include('partner.layouts.sidebar-fotostudio')
+                        @elseif($partner->pr_type == '2')
+                            @include('partner.layouts.sidebar-fotografer')
+                        @elseif($partner->pr_type == '3')
+                            @include('partner.layouts.sidebar-mua')
+                        @elseif($partner->pr_type == '4')
+                            @include('partner.layouts.sidebar-kebaya')
                         @endif
                     @else
                     @endif

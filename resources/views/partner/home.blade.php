@@ -28,10 +28,14 @@
                     </div>
                 </div>
                 @elseif($partner->status == '1')
-                    @if($partner->pr_type == '4')
-                        @include('partner.kebaya.dashboard')
-                    @elseif($partner->pr_type == '1')
+                    @if($partner->pr_type == '1')
                         @include('partner.ps.dashboard')
+                    @elseif($partner->pr_type == '2')
+                        @include('partner.pg.dashboard')
+                    @elseif($partner->pr_type == '3')
+                        @include('partner.mua.dashboard')
+                    @elseif($partner->pr_type == '4')
+                        @include('partner.kebaya.dashboard')
                     @endif
                 @elseif($partner->status == '2')
                 <div class="card ">
