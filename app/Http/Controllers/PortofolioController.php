@@ -94,14 +94,17 @@ class PortofolioController extends Controller
     {
         $user = Auth::user();
         // $album = Album::where('user_id', $user->id)->first();
-        $data = DB::table('album')
-                ->where('user_id', $user->id)
-                ->select('*')
-                ->first();
         $partner = DB::table('partner')
                     ->where('user_id',$user->id)
                     ->select('*')
                     ->first();
+        if ($partner->status != 1) {
+            return redirect()->route('partner.dashboard', compact('partner'));
+        }
+        $data = DB::table('album')
+                ->where('user_id', $user->id)
+                ->select('*')
+                ->first();
         return view('partner.portofolio.album-portofolio', ['data' => $data, 'partner' => $partner]);
     }
 
