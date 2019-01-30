@@ -10,6 +10,10 @@ use File;
 use Image;
 use Auth;
 Use Redirect;
+Use App\PGPackage;
+Use App\PGType;
+Use App\PGDurasi;
+Use App\Partner;
 
 class PackageController extends Controller
 {
@@ -19,10 +23,11 @@ class PackageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $listTag = DB::table('pg_type')->get();
         $user = Auth::user();
-        $package = DB::table('ps_package')
-                    ->where('user_id',$user->id)
+        $package = DB::table('pg_package')
+                    ->where('partner_id',$user->id)
                     ->where('status', '1')
                     ->select('*')
                     ->get();
@@ -30,6 +35,7 @@ class PackageController extends Controller
                     ->where('user_id',$user->id)
                     ->select('*')
                     ->first();
+        $hargaPaket = PGDurasi::where('partner_id', $partner->id)->get();
 
         return view('partner.pg.package.index', compact('partner', 'package', 'hargaPaket'));
     }
@@ -60,24 +66,30 @@ class PackageController extends Controller
         if ($request->pg_printed == 'Exclude' && $request->pg_printed_frame != 'Exclude') {
             return Redirect::back()->withInput(Input::all());
         }
-        dd($request);
+        // dd($request);
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
 
-
-
-        $package = new PSPkg();
-        $package->user_id = $partner->user_id;
-        $package->sub_category_id = $partner->pr_subtype;
+        $package = new PGPackage();
+        $package->partner_id = $partner->user_id;
         $package->partner_name = $partner->pr_name;
-        $package->pkg_category_them = $request->input('pkg_category_them');
-        $package->pkg_name_them = $request->input('pkg_name_them');
-        $package->pkg_fotografer = $request->input('pkg_fotografer');
-        $package->pkg_print_size = $request->input('pkg_print_size');
-        $package->pkg_edited_photo = $request->input('pkg_edited_photo');
-        $package->pkg_capacity = $request->input('pkg_capacity');
-        $package->pkg_frame = $request->input('pkg_frame');
-        $package->pkg_overtime_them = $pkg_overtime_them;
+        $package->pg_category = $partner->pr_subtype;
+        $package->pg_name = $request->input('pg_name');
+        $package->pg_mua = $request->input('pg_mua');
+        $package->pg_stylist = $request->input('pg_stylist');
+        $package->pg_desc = $request->input('pg_desc');
+        $package->pg_location_jumlah = $request->input('pg_location_jumlah');
+        $package->pg_album_kolase = $request->input('pg_album_kolase');
+        $package->pg_album_ukuran = $request->input('pg_album_ukuran');
+        $package->pg_album_jumlah_hal = $request->input('pg_album_jumlah_hal');
+        $package->pg_album_jumlah_foto = $request->input('pg_album_jumlah_foto');
+        $package->pg_printed = $request->input('pg_printed');
+        $package->pg_printed_size = $request->input('pg_printed_size');
+        $package->pg_printed_frame = $request->input('pg_printed_frame');
+        $package->pg_printed_jumlah = $request->input('pg_printed_jumlah');
+        $package->pg_edited = $request->input('pg_edited');
+        $package->pg_edited_jumlah = $request->input('pg_edited_jumlah');
+        $package->pg_edited_saved = $request->input('pg_edited_saved');
         $package->status = '1';
         $package->save();
 
@@ -85,40 +97,40 @@ class PackageController extends Controller
         if ($package->save()) {
             for ($i = 0; $i < count($request->tag); $i++) {
                 $dataSet[] = [
-                    'package_id' => $package->id,
-                    'tag_id' => $request->tag[$i],
+                    'id' => $package->id,
+                    'type_id' => $request->tag[$i],
                 ];
             }
         }
-        PartnerTag::insert($dataSet);
+        PGType::insert($dataSet);
 
         $durasiSet = [];
         if ($package->save()) {
             for ($i = 0; $i < count($request->durasi_jam); $i++) {
                 $price = $request->durasi_harga[$i];
                 $price_array = explode(".", $price);
-                $pkg_price_them = '';
+                $pg_price = '';
                 foreach ($price_array as $key => $value) {
-                    $pkg_price_them = $pkg_price_them . $price_array[$key];
+                    $pg_price = $pg_price . $price_array[$key];
                 }
                 $durasiSet[] = [
                     'partner_id' => $partner->id,
                     'package_id' => $package->id,
                     'durasi_jam' => $request->durasi_jam[$i],
-                    'durasi_harga' => $pkg_price_them,
+                    'durasi_harga' => $pg_price,
                 ];
             }
         }
-        PartnerDurasi::insert($durasiSet);
+        PGDurasi::insert($durasiSet);
 
-        $durasiPaket = PartnerDurasi::where('package_id', $package->id)->min('durasi_harga');
-        $package->pkg_price_them = $durasiPaket;
+        $durasiPaket = PGDurasi::where('package_id', $package->id)->min('durasi_harga');
+        $package->pg_price = $durasiPaket;
         $package->save();
         
-        if ($request->hasFile('pkg_img_them')) {
-            $package->pkg_img_them = $package->id . '_' . $package->pkg_category_them . '_' . $package->pkg_name_them . '_1';
+        if ($request->hasFile('pg_img_1')) {
+            $package->pg_img_1 = $package->id . '_' . $package->pg_category . '_' . $package->pg_name . '_1';
             $package->save();
-            $foto_new = $package->pkg_img_them;
+            $foto_new = $package->pg_img_1;
             if( File::exists(public_path('/img_pkg/' . $foto_new .'.jpeg' ))){
                 File::delete(public_path('/img_pkg/' . $foto_new .'.jpeg' ));
             } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.jpg' ))){
@@ -132,18 +144,18 @@ class PackageController extends Controller
             } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPEG' ))){
                 File::delete(public_path('/img_pkg/' . $foto_new .'.JPEG' ));
             }  
-            $foto = $request->file('pkg_img_them');
+            $foto = $request->file('pg_img_1');
             $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
             Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
             $user = Auth::user();
-            $package= PSPkg::where('user_id',$user->id)->first();
+            $package= PGPackage::where('partner_id',$user->id)->first();
             $package->save();
         }
 
-        if ($request->hasFile('pkg_img_them2')) {
-            $package->pkg_img_them2 = $package->id . '_' . $package->pkg_category_them . '_' . $package->pkg_name_them . '_2';
+        if ($request->hasFile('pg_img_2')) {
+            $package->pg_img_2 = $package->id . '_' . $package->pg_category . '_' . $package->pg_name . '_2';
             $package->save();
-            $foto_new = $package->pkg_img_them2;
+            $foto_new = $package->pg_img_2;
             if( File::exists(public_path('/img_pkg/' . $foto_new .'.jpeg' ))){
                 File::delete(public_path('/img_pkg/' . $foto_new .'.jpeg' ));
             } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.jpg' ))){
@@ -157,18 +169,18 @@ class PackageController extends Controller
             } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPEG' ))){
                 File::delete(public_path('/img_pkg/' . $foto_new .'.JPEG' ));
             }
-            $foto = $request->file('pkg_img_them2');
+            $foto = $request->file('pg_img_2');
             $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
             Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
             $user = Auth::user();
-            $package= PSPkg::where('user_id',$user->id)->first();
+            $package= PGPkg::where('partner_id',$user->id)->first();
             $package->save();
         }
 
-        if ($request->hasFile('pkg_img_them3')) {
-            $package->pkg_img_them3 = $package->id . '_' . $package->pkg_category_them . '_' . $package->pkg_name_them . '_3';
+        if ($request->hasFile('pg_img_3')) {
+            $package->pg_img_3 = $package->id . '_' . $package->pg_category . '_' . $package->pg_name . '_3';
             $package->save();
-            $foto_new = $package->pkg_img_them3;
+            $foto_new = $package->pg_img_3;
             if( File::exists(public_path('/img_pkg/' . $foto_new .'.jpeg' ))){
                 File::delete(public_path('/img_pkg/' . $foto_new .'.jpeg' ));
             } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.jpg' ))){
@@ -182,18 +194,18 @@ class PackageController extends Controller
             } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPEG' ))){
                 File::delete(public_path('/img_pkg/' . $foto_new .'.JPEG' ));
             }
-            $foto = $request->file('pkg_img_them3');
+            $foto = $request->file('pg_img_3');
             $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
             Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
             $user = Auth::user();
-            $package= PSPkg::where('user_id',$user->id)->first();
+            $package= PGPkg::where('partner_id',$user->id)->first();
             $package->save();
         }
 
-        if ($request->hasFile('pkg_img_them4')) {
-            $package->pkg_img_them4 = $package->id . '_' . $package->pkg_category_them . '_' . $package->pkg_name_them . '_4';
+        if ($request->hasFile('pg_img_4')) {
+            $package->pg_img_4 = $package->id . '_' . $package->pg_category . '_' . $package->pg_name . '_4';
             $package->save();
-            $foto_new = $package->pkg_img_them4;
+            $foto_new = $package->pg_img_4;
             if( File::exists(public_path('/img_pkg/' . $foto_new .'.jpeg' ))){
                 File::delete(public_path('/img_pkg/' . $foto_new .'.jpeg' ));
             } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.jpg' ))){
@@ -207,11 +219,11 @@ class PackageController extends Controller
             } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPEG' ))){
                 File::delete(public_path('/img_pkg/' . $foto_new .'.JPEG' ));
             }
-            $foto = $request->file('pkg_img_them4');
+            $foto = $request->file('pg_img_4');
             $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
             Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
             $user = Auth::user();
-            $package= PSPkg::where('user_id',$user->id)->first();
+            $package= PGPkg::where('partner_id',$user->id)->first();
             $package->save();
         }
 
@@ -226,7 +238,17 @@ class PackageController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::user();
+        $partner = DB::table('partner')
+                    ->where('user_id',$user->id)
+                    ->select('*')
+                    ->first();
+        $package = PGPackage::where('id', $id)->get();
+        $packageList = PGPackage::where('id', $id)->first();
+        $partnerTag = PGType::join('pg_type', 'pg_type.id', '=', 'pg_package_type.id')->where('type_id', $packageList->id)->get();
+        $durasiPaket = PGDurasi::where('package_id', $packageList->id)->get();
+
+        return view('partner.pg.package.show', compact('package', 'partnerTag', 'partner', 'durasiPaket'));
     }
 
     /**
@@ -249,7 +271,168 @@ class PackageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = Auth::user();
+        $id = $request->id;
+        $partner = Partner::where('user_id', $user->id)->first();
+        $package = PGPackage::findOrFail($id);
+        
+        // $package->pg_category = $request->input('pg_category');
+        $package->pg_name = $request->input('pg_name');
+        $package->pg_mua = $request->input('pg_mua');
+        $package->pg_stylist = $request->input('pg_stylist');
+        $package->pg_desc = $request->input('pg_desc');
+        $package->pg_location_jumlah = $request->input('pg_location_jumlah');
+        $package->pg_album_kolase = $request->input('pg_album_kolase');
+        $package->pg_album_ukuran = $request->input('pg_album_ukuran');
+        $package->pg_album_jumlah_hal = $request->input('pg_album_jumlah_hal');
+        $package->pg_album_jumlah_foto = $request->input('pg_album_jumlah_foto');
+        $package->pg_printed = $request->input('pg_printed');
+        $package->pg_printed_size = $request->input('pg_printed_size');
+        $package->pg_printed_frame = $request->input('pg_printed_frame');
+        $package->pg_printed_jumlah = $request->input('pg_printed_jumlah');
+        $package->pg_edited = $request->input('pg_edited');
+        $package->pg_edited_jumlah = $request->input('pg_edited_jumlah');
+        $package->pg_edited_saved = $request->input('pg_edited_saved');
+        $package->save();
+
+        $package = PGPackage::findOrFail($id);
+        
+        if(!empty($request->tag)) {
+            $dataSet = [];
+            if ($package->save()) {
+                for ($i = 0; $i < count($request->tag); $i++) {
+                    $dataSet[] = [
+                        'id' => $package->id,
+                        'type_id' => $request->tag[$i],
+                    ];
+                }
+            }
+            PGType::insert($dataSet);
+        }
+        
+        if(!empty($request->durasi_jam)) {
+            $durasiSet = [];
+            if ($package->save()) {
+                for ($i = 0; $i < count($request->durasi_jam); $i++) {
+                    $price = $request->durasi_harga[$i];
+                    $price_array = explode(".", $price);
+                    $pg_price = '';
+                    foreach ($price_array as $key => $value) {
+                        $pg_price = $pg_price . $price_array[$key];
+                    }
+                    $durasiSet[] = [
+                        'partner_id' => $partner->id,
+                        'package_id' => $package->id,
+                        'durasi_jam' => $request->durasi_jam[$i],
+                        'durasi_harga' => $pg_price,
+                    ];
+                }
+            }
+            PGDurasi::insert($durasiSet);
+        }
+        
+        if ($request->hasFile('pg_img_1')) {
+            $package->pg_img_1 = $package->id . '_' . $package->pg_category . '_' . $package->pg_name . '_1';
+            $package->save();
+            $foto_new = $package->pg_img_1;
+            if( File::exists(public_path('/img_pkg/' . $foto_new .'.jpeg' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.jpeg' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.jpg' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.jpg' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.png' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.png' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.JPG' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.PNG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.PNG' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPEG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.JPEG' ));
+            }  
+            $foto = $request->file('pg_img_1');
+            $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
+            Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
+            $user = Auth::user();
+            $package= PGPackage::where('user_id',$user->id)->first();
+            $package->save();
+        }
+
+        if ($request->hasFile('pg_img_2')) {
+            $package->pg_img_2 = $package->id . '_' . $package->pg_category . '_' . $package->pg_name . '_2';
+            $package->save();
+            $foto_new = $package->pg_img_2;
+            if( File::exists(public_path('/img_pkg/' . $foto_new .'.jpeg' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.jpeg' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.jpg' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.jpg' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.png' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.png' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.JPG' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.PNG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.PNG' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPEG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.JPEG' ));
+            }
+            $foto = $request->file('pg_img_2');
+            $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
+            Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
+            $user = Auth::user();
+            $package= PGPackage::where('user_id',$user->id)->first();
+            $package->save();
+        }
+
+        if ($request->hasFile('pg_img_3')) {
+            $package->pg_img_3 = $package->id . '_' . $package->pg_category . '_' . $package->pg_name . '_3';
+            $package->save();
+            $foto_new = $package->pg_img_3;
+            if( File::exists(public_path('/img_pkg/' . $foto_new .'.jpeg' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.jpeg' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.jpg' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.jpg' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.png' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.png' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.JPG' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.PNG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.PNG' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPEG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.JPEG' ));
+            }
+            $foto = $request->file('pg_img_3');
+            $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
+            Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
+            $user = Auth::user();
+            $package= PGPackage::where('user_id',$user->id)->first();
+            $package->save();
+        }
+
+        if ($request->hasFile('pg_img_4')) {
+            $package->pg_img_4 = $package->id . '_' . $package->pg_category . '_' . $package->pg_name . '_4';
+            $package->save();
+            $foto_new = $package->pg_img_4;
+            if( File::exists(public_path('/img_pkg/' . $foto_new .'.jpeg' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.jpeg' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.jpg' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.jpg' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.png' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.png' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.JPG' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.PNG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.PNG' ));
+            } elseif( File::exists(public_path('/img_pkg/' . $foto_new .'.JPEG' ))){
+                File::delete(public_path('/img_pkg/' . $foto_new .'.JPEG' ));
+            }
+            $foto = $request->file('pg_img_4');
+            $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
+            Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
+            $user = Auth::user();
+            $package= PGPackage::where('user_id',$user->id)->first();
+            $package->save();
+        }
+        
+         return redirect()->intended(route('pg-package.index'));  
+        // return redirect()->intended(route('partner.listpackage'));
     }
 
     /**
@@ -262,4 +445,5 @@ class PackageController extends Controller
     {
         //
     }
+
 }

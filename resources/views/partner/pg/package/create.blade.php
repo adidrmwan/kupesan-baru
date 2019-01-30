@@ -89,7 +89,7 @@
                                         <div class="col-lg-5 col-xs-4">
                                             <div class="form-group">
                                               <label>Durasi Paket (1 hari)<small><b style="color:red;"> * </b></small></label>
-                                              <select  class="form-control" id="inlineFormCustomSelectPref" value="{{ old('pg_duration') }}" name="pg_duration[]" required>
+                                              <select  class="form-control" id="inlineFormCustomSelectPref" value="{{ old('pg_duration') }}" name="durasi_jam[]" required>
                                                 <option selected value="">Pilih Durasi Paket</option>
                                                 <option value="1">1 Jam</option>
                                                 <option value="2">2 Jam</option>
@@ -126,7 +126,7 @@
                                               <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">Rp</span>
                                               </div>
-                                              <input class="form-control number" placeholder="Harga Paket" min="1000" value="{{ old('pg_price') }}" name="pg_price[]" required>
+                                              <input class="form-control number" placeholder="Harga Paket" min="1000" value="{{ old('pg_price') }}" name="durasi_harga[]" required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                             </div>
                                             </div>
@@ -391,8 +391,8 @@
 
 @section('script')
 <script type="text/javascript">
-  var pkg_duration_them = $('#durasi');
-    $(pkg_duration_them).select2({
+  var pg_duration = $('#durasi');
+    $(pg_duration).select2({
       data:[
         {id:1,text:"1 Jam"},
         {id:2,text:"2 Jam"},
