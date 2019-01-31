@@ -9,6 +9,6 @@ class PGPackageType extends Model
     protected $table = 'pg_package_type';
     
     protected $fillable = [
-        'package_d', 'type_id',
+        'package_id', 'type_id',
     ];
 }

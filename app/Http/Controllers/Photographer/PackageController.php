@@ -14,6 +14,7 @@ Use App\PGPackage;
 Use App\PGType;
 Use App\PGDurasi;
 Use App\Partner;
+Use App\PGPackageType;
 
 class PackageController extends Controller
 {
@@ -102,7 +103,7 @@ class PackageController extends Controller
                 ];
             }
         }
-        PGType::insert($dataSet);
+        PGPackageType::insert($dataSet);
 
         $durasiSet = [];
         if ($package->save()) {
@@ -245,7 +246,7 @@ class PackageController extends Controller
                     ->first();
         $package = PGPackage::where('id', $id)->get();
         $packageList = PGPackage::where('id', $id)->first();
-        $partnerTag = PGType::join('pg_type', 'pg_type.id', '=', 'pg_package_type.id')->where('type_id', $packageList->id)->get();
+        $partnerTag = PGPackageType::join('pg_type', 'pg_type.id', '=', 'pg_package_type.package_id')->where('package_id', $packageList->id)->get();
         $durasiPaket = PGDurasi::where('package_id', $packageList->id)->get();
 
         return view('partner.pg.package.show', compact('package', 'partnerTag', 'partner', 'durasiPaket'));
@@ -302,12 +303,12 @@ class PackageController extends Controller
             if ($package->save()) {
                 for ($i = 0; $i < count($request->tag); $i++) {
                     $dataSet[] = [
-                        'id' => $package->id,
+                        'package_id' => $package->id,
                         'type_id' => $request->tag[$i],
                     ];
                 }
             }
-            PGType::insert($dataSet);
+            PGPackageType::insert($dataSet);
         }
         
         if(!empty($request->durasi_jam)) {

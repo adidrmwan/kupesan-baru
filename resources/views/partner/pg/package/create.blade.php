@@ -233,7 +233,7 @@
   <div class="col-md-6">
       <div class="form-group">
           <label>Jumlah Foto<small><b style="color:red;"> * </b></small></label>
-          <input type="number" min="0" max="1000" class="form-control" placeholder="Jumlah Halaman" required="" name="pg_album_jumlah_foto">
+          <input type="number" min="0" max="1000" class="form-control" placeholder="Jumlah Foto" required="" name="pg_album_jumlah_foto">
           <div class="invalid-feedback">Isi 0, jika Exclude Album Kolase.</div>
       </div>
   </div>
@@ -295,7 +295,7 @@
   <div class="col-md-6">
       <div class="form-group">
           <label>Jumlah Foto<small><b style="color:red;"> * </b></small></label>
-          <input type="number" min="0" max="1000" class="form-control" placeholder="Jumlah Halaman" required="" name="pg_printed_jumlah">
+          <input type="number" min="0" max="1000" class="form-control" placeholder="Jumlah Foto" required="" name="pg_printed_jumlah">
           <div class="invalid-feedback">Isi 0, jika Exclude Foto Cetak.</div>
       </div>
   </div>

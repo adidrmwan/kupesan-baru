@@ -179,7 +179,16 @@
                                         </div>  
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Jumlah Lokasi Pemotretan<small><b style="color:red;"> * </b></small></label>
+                                            <input type="number" min="1" max="100" class="form-control" placeholder="Jumlah Lokasi Pemotretan" required="" name="pg_location_jumlah" value="{{$data->pg_location_jumlah}}">
+                                            <div class="invalid-feedback">Wajib diisi.</div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>MUA/Penata Rias</label>
                                                 <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_mua" required>
@@ -194,9 +203,7 @@
                                                 <div class="invalid-feedback">Wajib diisi.</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Stylist</label>
                                                 <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_stylist" required>
@@ -212,6 +219,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <hr>
                                     <h5 style="text-align: center; ">Album Kolase</h5>
                                     <small style="color: grey;">Jika Exclude Album Kolase:
@@ -222,7 +230,7 @@
                                       </ul>
                                     </small>
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Album Kolase</label>
                                                 <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_album_kolase" required>
@@ -237,7 +245,154 @@
                                                 <div class="invalid-feedback">Wajib diisi.</div>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label>Ukuran<small><b style="color:red;"> * </b></small></label>
+                                              <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_album_ukuran" required>
+                                                  <option selected value="">{{$data->pg_album_ukuran}}</option>
+                                                  <option value="0">Exclude</option>
+                                                  <option value="15 x 10 cm">15 x 10 cm</option>
+                                                  <option value="20 x 20 cm">20 x 20 cm</option>
+                                                  <option value="20 x 25 cm">20 x 25 cm</option>
+                                                  <option value="20 x 30 cm">20 x 30 cm</option>
+                                                  <option value="25 x 30 cm">25 x 30 cm</option>
+                                                  <option value="30 x 20 cm">30 x 20 cm</option>
+                                                  <option value="30 x 40 cm">30 x 40 cm</option>
+                                              </select>
+                                              <div class="invalid-feedback">Pilih Exclude, jika Exclude Album Kolase.</div>
+                                          </div>
+                                      </div>
                                     </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jumlah Halaman<small><b style="color:red;"> * </b></small></label>
+                                                <input type="number" min="0" max="1000" class="form-control" placeholder="Jumlah Halaman" required="" name="pg_album_jumlah_hal" value="{{$data->pg_album_jumlah_hal}}">
+                                                <div class="invalid-feedback">Isi 0, jika Exclude Album Kolase.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jumlah Foto<small><b style="color:red;"> * </b></small></label>
+                                                <input type="number" min="0" max="1000" class="form-control" placeholder="Jumlah Foto" required="" name="pg_album_jumlah_foto" value="{{$data->pg_album_jumlah_foto}}">
+                                                <div class="invalid-feedback">Isi 0, jika Exclude Album Kolase.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5 style="text-align: center; ">Foto Cetak</h5>
+                                    <small style="color: grey;">Jika Exclude Foto Cetak:
+                                      <ul>
+                                        <li>Ukuran: Exclude.</li>
+                                        <li>Jumlah Foto: 0</li>
+                                      </ul>
+                                    </small>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Foto Cetak</label>
+                                                <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_printed" required>
+                                                    <option selected value="{{$data->pg_printed}}">{{$data->pg_printed}}</option>
+                                                    @if($data->pg_printed != 'Include')
+                                                    <option value="Include">Include</option>
+                                                    @endif
+                                                    @if($data->pg_printed != 'Exclude')
+                                                    <option value="Exclude">Exclude</option>
+                                                    @endif
+                                                </select>
+                                                <div class="invalid-feedback">Wajib diisi.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label>Ukuran<small><b style="color:red;"> * </b></small></label>
+                                              <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_printed_size" required>
+                                                  <option selected value="{{$data->pg_printed_size}}">{{$data->pg_printed_size}}</option>
+                                                  <option value="0">Exclude</option>
+                                                  <option value="15 x 10 cm">15 x 10 cm</option>
+                                                  <option value="20 x 20 cm">20 x 20 cm</option>
+                                                  <option value="20 x 25 cm">20 x 25 cm</option>
+                                                  <option value="20 x 30 cm">20 x 30 cm</option>
+                                                  <option value="25 x 30 cm">25 x 30 cm</option>
+                                                  <option value="30 x 20 cm">30 x 20 cm</option>
+                                                  <option value="30 x 40 cm">30 x 40 cm</option>
+                                                  <option value="40 x 60 cm">40 x 60 cm</option>
+                                                  <option value="50 x 40 cm">50 x 40 cm</option>
+                                              </select>
+                                              <div class="invalid-feedback">Pilih Exclude, jika Exclude Album Kolase.</div>
+                                          </div>
+                                      </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Frame<small><b style="color:red;"> * </b></small></label>
+                                                <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_printed_frame" required>
+                                                    <option selected value="{{$data->pg_printed_frame}}">{{$data->pg_printed_frame}}</option>
+                                                    @if($data->pg_printed_frame != 'Include')
+                                                    <option value="Include">Include</option>
+                                                    @endif
+                                                    @if($data->pg_printed_frame != 'Exclude')
+                                                    <option value="Exclude">Exclude</option>
+                                                    @endif
+                                                </select>
+                                                <div class="invalid-feedback">Pilih Exclude, jika Exclude Foto Cetak.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jumlah Foto<small><b style="color:red;"> * </b></small></label>
+                                                <input type="number" min="0" max="1000" class="form-control" placeholder="Jumlah Foto" required="" name="pg_printed_jumlah" value="{{$data->pg_printed_jumlah}}">
+                                                <div class="invalid-feedback">Isi 0, jika Exclude Album Kolase.</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                    <h5 style="text-align: center; ">Foto Edit</h5>
+                                    <small style="color: grey;">Jika Exclude Foto Edit:
+                                      <ul>
+                                        <li>Jumlah Foto: 0</li>
+                                      </ul>
+                                    </small>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Foto Edit<small><b style="color:red;"> * </b></small></label>
+                                                <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_edited" required>
+                                                    <option selected value="{{$data->pg_edited}}">{{$data->pg_edited}}</option>
+                                                    @if($data->pg_edited != 'Include')
+                                                    <option value="Include">Include</option>
+                                                    @endif
+                                                    @if($data->pg_edited != 'Exclude')
+                                                    <option value="Exclude">Exclude</option>
+                                                    @endif
+                                                </select>
+                                                <div class="invalid-feedback">Wajib diisi.</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Disimpan di<small><b style="color:red;"> * </b></small></label>
+                                                <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_edited_saved" required>
+                                                  <option selected value="{{$data->pg_edited_saved}}">{{$data->pg_edited_saved}}</option>
+                                                  <option value="Exclude">Exclude</option>
+                                                  <option value="CD/DVD">CD/DVD</option>
+                                                  <option value="Flashdisk">Flashdisk</option>
+                                                  <option value="CD/DVD/Flashdisk">CD/DVD/Flashdisk</option>
+                                              </select>
+                                                <div class="invalid-feedback">Pilih Exclude, jika Exclude Foto Edit.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        
+                                    </div>
+
+                                    <hr>
                                     <div class="row">
                                         <div class="col-md-12">
                                           <div class="form-group">
@@ -252,6 +407,14 @@
                                                 <span class="badge badge-info">{{$tag->type_name}}</span>
                                             @endforeach
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label>Deskripsi Paket/Informasi Tambahan (Opsional)</label>
+                                          <textarea class="form-control" name="pg_desc" style="height: 100px;">{{$data->pg_desc}}</textarea>
+                                        </div>
+                                      </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
