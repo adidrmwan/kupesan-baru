@@ -44,6 +44,7 @@ Route::get('detail/partner/spotfoto/paket', 'StudioController@detailPaketSpot')-
 //Search at Home by tag & kota
 Route::post('/search/spotfoto', 'SearchController@searchFotostudio')->name('search.fotostudio');
 Route::post('/search/busana', 'SearchController@searchKebaya')->name('search.kebaya');
+Route::post('/search/fotografer', 'SearchController@searchFotografer')->name('search.fotografer');
 
 //Search at navigation box
 Route::post('/search', 'SearchController@searchData')->name('search.data');
@@ -82,25 +83,35 @@ Route::group(['prefix' => '2', 'middleware' => ['auth','role:user']], function()
     Route::get('/profil-KU', 'CustomerController@dashboard')->name('dashboard');
     Route::post('/booking/info/', 'CustomerController@showInfo')->name('booking.info');
 
-    // kebaya 
-    Route::get('/booking/kebaya/2', 'KebayaBookingController@step2')->name('kebaya.step2');
-    Route::post('/booking/kebaya/2', 'KebayaBookingController@submitStep2')->name('kebaya.submit.step2');
-    Route::get('/booking/kebaya/2a', 'KebayaBookingController@step2a')->name('kebaya.step2a');
-    Route::post('/booking/kebaya/2a', 'KebayaBookingController@submitStep2a')->name('kebaya.submit.step2a');
-    Route::get('/booking/kebaya/3', 'KebayaBookingController@step3')->name('kebaya.step3');
-    Route::post('/booking/kebaya/3', 'KebayaBookingController@submitStep3')->name('kebaya.submit.step3');
-    Route::get('/booking/kebaya/4', 'KebayaBookingController@step4')->name('kebaya.step4');
-    Route::post('/booking/kebaya/4', 'KebayaBookingController@submitStep4')->name('kebaya.submit.step4');
-    Route::get('/booking/kebaya/6', 'KebayaBookingController@step6')->name('kebaya.step6');
-    Route::post('/booking/kebaya/7', 'KebayaBookingController@step7')->name('kebaya.step7');
-    Route::post('/booking/kebaya/8', 'KebayaBookingController@step8')->name('kebaya.step8');
-    Route::post('/booking/kebaya/9', 'KebayaBookingController@uploadBukti')->name('kebaya.upload.bukti');
-    Route::get('/booking/kebaya/9', 'KebayaBookingController@step9')->name('kebaya.step9');
-    Route::post('/booking/kebaya/info', 'CustomerController@showKebayaInfo')->name('kebaya.booking.info');
-});
-Route::get('/booking/kebaya/1', 'KebayaBookingController@step1')->name('kebaya.step1');
-Route::get('/booking/ps/1', 'BookingController@step1')->name('ask.page');
+    // busana 
+    Route::get('/booking/busana/2', 'KebayaBookingController@step2')->name('kebaya.step2');
+    Route::post('/booking/busana/2', 'KebayaBookingController@submitStep2')->name('kebaya.submit.step2');
+    Route::get('/booking/busana/2a', 'KebayaBookingController@step2a')->name('kebaya.step2a');
+    Route::post('/booking/busana/2a', 'KebayaBookingController@submitStep2a')->name('kebaya.submit.step2a');
+    Route::get('/booking/busana/3', 'KebayaBookingController@step3')->name('kebaya.step3');
+    Route::post('/booking/busana/3', 'KebayaBookingController@submitStep3')->name('kebaya.submit.step3');
+    Route::get('/booking/busana/4', 'KebayaBookingController@step4')->name('kebaya.step4');
+    Route::post('/booking/busana/4', 'KebayaBookingController@submitStep4')->name('kebaya.submit.step4');
+    Route::get('/booking/busana/6', 'KebayaBookingController@step6')->name('kebaya.step6');
+    Route::post('/booking/busana/7', 'KebayaBookingController@step7')->name('kebaya.step7');
+    Route::post('/booking/busana/8', 'KebayaBookingController@step8')->name('kebaya.step8');
+    Route::post('/booking/busana/9', 'KebayaBookingController@uploadBukti')->name('kebaya.upload.bukti');
+    Route::get('/booking/busana/9', 'KebayaBookingController@step9')->name('kebaya.step9');
+    Route::post('/booking/busana/info', 'CustomerController@showKebayaInfo')->name('kebaya.booking.info');
 
+    // Photographer 
+    Route::namespace('Photographer')
+    ->group(function () {
+        Route::group(['prefix' => 'booking/pg'], function(){
+            Route::get('2', 'BookingController@step2')->name('pg.step2');
+            Route::post('2', 'BookingController@submitStep2')->name('pg.submit.step2');
+        });
+
+    });
+});
+Route::get('/booking/busana/1', 'KebayaBookingController@step1')->name('kebaya.step1');
+Route::get('/booking/ps/1', 'BookingController@step1')->name('ask.page');
+Route::get('/booking/pg/1', 'Photographer\BookingController@step1')->name('pg.step1');
 
 //Route untuk studio foto
 Route::get('/studio/detail', 'StudioController@studiodetail')->name('studio-detail');

@@ -210,13 +210,13 @@
           <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_album_ukuran" required>
               <option selected value="">Pilih</option>
               <option value="0">Exclude</option>
-              <option value="15 x 10">15 x 10</option>
-              <option value="20 x 20">20 x 20</option>
-              <option value="20 x 25">20 x 25</option>
-              <option value="20 x 30">20 x 30</option>
-              <option value="25 x 30">25 x 30</option>
-              <option value="30 x 20">30 x 20</option>
-              <option value="30 x 40">30 x 40</option>
+              <option value="15 x 10 cm">15 x 10 cm</option>
+              <option value="20 x 20 cm">20 x 20 cm</option>
+              <option value="20 x 25 cm">20 x 25 cm</option>
+              <option value="20 x 30 cm">20 x 30 cm</option>
+              <option value="25 x 30 cm">25 x 30 cm</option>
+              <option value="30 x 20 cm">30 x 20 cm</option>
+              <option value="30 x 40 cm">30 x 40 cm</option>
           </select>
           <div class="invalid-feedback">Pilih Exclude, jika Exclude Album Kolase.</div>
       </div>
@@ -266,15 +266,15 @@
           <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_printed_size" required>
               <option selected value="">Pilih</option>
               <option value="Exclude">Exclude</option>
-              <option value="15 x 10">15 x 10</option>
-              <option value="20 x 20">20 x 20</option>
-              <option value="20 x 25">20 x 25</option>
-              <option value="20 x 30">20 x 30</option>
-              <option value="25 x 30">25 x 30</option>
-              <option value="30 x 20">30 x 20</option>
-              <option value="30 x 40">30 x 40</option>
-              <option value="40 x 60">40 x 60</option>
-              <option value="50 x 40">50 x 40</option>
+              <option value="15 x 10 cm">15 x 10 cm</option>
+              <option value="20 x 20 cm">20 x 20 cm</option>
+              <option value="20 x 25 cm">20 x 25 cm</option>
+              <option value="20 x 30 cm">20 x 30 cm</option>
+              <option value="25 x 30 cm">25 x 30 cm</option>
+              <option value="30 x 20 cm">30 x 20 cm</option>
+              <option value="30 x 40 cm">30 x 40 cm</option>
+              <option value="40 x 60 cm">40 x 60 cm</option>
+              <option value="50 x 40 cm">50 x 40 cm</option>
           </select>
           <div class="invalid-feedback">Pilih Exclude, jika Exclude Foto Cetak.</div>
       </div>

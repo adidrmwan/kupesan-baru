@@ -66,7 +66,7 @@
                         </div>
                         
                         <div id="fotografer" class="tab-pane" style="border-radius: 15px;">
-                            <form role="form" action="{{ route('search.fotostudio') }}" method="post" enctype="multipart/form-data">
+                            <form role="form" action="{{ route('search.fotografer') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                                 <div class="row">
                                     <h4 style="text-align: center; margin-top: -20px;" class="info-mobile-header">Fotografer</h4>
@@ -76,7 +76,7 @@
                                             <select  class="form-control" name="tag_id" required>
                                                 <option selected value="">Pilih Tema</option>
                                                 <option value="all">Semua</option>
-                                                @foreach($tag as $list)
+                                                @foreach($tema_fotografer as $list)
                                                 <option value="{{$list->id}}">{{$list->type_name}}</option>
                                                 @endforeach
                                             </select>

@@ -9,8 +9,8 @@
     <div id="booking" class="innerpage-section-padding">
         <div class="container">
             <div class="row">
-                @include('online-booking.kebaya.package-info')
-                <form role="form" action="{{ route('kebaya.submit.step2') }}" method="post" enctype="multipart/form-data" class="lg-booking-form">
+                @include('online-booking.pg.package-info')
+                <form role="form" action="{{ route('pg.submit.step2') }}" method="post" enctype="multipart/form-data" class="lg-booking-form">
                 {{ csrf_field() }}
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 content-side">
                     <div class="panel panel-default">
@@ -103,7 +103,7 @@
   }
   $('#startDate').datepicker({
       altField: '#datepickerkebaya2',
-      minDate:3,
+      minDate:2,
       maxDate: "+3M",
       beforeShowDay: function(date){
           var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
@@ -124,7 +124,7 @@
       trima.push(array[i].substring(10,""))
   }
   $('#endDate').datepicker({
-      minDate:3,
+      minDate:2,
       maxDate: "+3M",
       beforeShowDay: function(date){
           var string = jQuery.datepicker.formatDate('yy-mm-dd', date);

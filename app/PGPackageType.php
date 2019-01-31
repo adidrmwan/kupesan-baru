@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PGType extends Model
+class PGPackageType extends Model
 {
-    protected $table = 'pg_type';
+    protected $table = 'pg_package_type';
     
     protected $fillable = [
-        'id', 'type_name',
+        'package_d', 'type_id',
     ];
 }

@@ -63,6 +63,10 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->pg_printed == 'Exclude' && $request->pg_printed_frame != 'Exclude') {
+            return Redirect::back()->withInput(Input::all());
+        }
+        // dd($request);
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
 
@@ -93,7 +97,7 @@ class PackageController extends Controller
         if ($package->save()) {
             for ($i = 0; $i < count($request->tag); $i++) {
                 $dataSet[] = [
-                    'id' => $package->id,
+                    'package_id' => $package->id,
                     'type_id' => $request->tag[$i],
                 ];
             }

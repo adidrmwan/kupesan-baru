@@ -16,6 +16,10 @@ use App\Tag;
 use App\KebayaPartnerTema;
 use App\KebayaKategori;
 use App\KebayaBiayaSewa;
+use App\PGType;
+use App\PGPackage;
+use App\PGDurasi;
+use App\PGPackageType;
 
 class SearchController extends Controller
 {
@@ -25,9 +29,10 @@ class SearchController extends Controller
         //         ->distinct()->orderBy('tag_title', 'asc')->get(['ps_tag.tag_id', 'ps_tag.tag_title']);
         $tag = DB::table('partner_type')->where('id', 5)->orWhere('id', 6)->orWhere('id', 7)->orWhere('id', 8)->get();
         $tema = KebayaKategori::get();
+        $tema_fotografer = PGType::get();
         $thumbnailSpot = Partner::where('pr_type', '1')->where('status', '1')->get();
         $thumbnailBusana = Partner::where('pr_type', '4')->where('status', '1')->get();
-        return view('home', compact('thumbnailSpot', 'thumbnailBusana', 'tema', 'tag'));
+        return view('home', compact('thumbnailSpot', 'thumbnailBusana', 'tema', 'tag', 'tema_fotografer'));
     }
 
     public function searchKebaya(Request $request)
@@ -265,10 +270,98 @@ class SearchController extends Controller
         } else {
             return view('search-result.fotostudio.notfound', ['allThemes' => $allThemes], compact('tag_id', 'tema', 'listtema'));
         }
-        
-
     }
 
+    public function searchFotografer(Request $request)
+    {
+        $tag_id = $request->tag_id;
+        
+        if (!empty($request->theme)) {
+            $tag_id = $request->theme;
+        }
+        $tema = DB::table('partner_type')->where('id', $tag_id)->first();
+        $listtema = PGPackageType::join('pg_type', 'pg_type.id', '=', 'pg_package_type.type_id')
+                ->distinct()->orderBy('type_name', 'asc')->get(['pg_type.id', 'pg_type.type_name']);
+        $theme = $request->theme;
+        
+        if (!empty($request->min_price)) {
+            $min = $request->min_price;
+            $min_array = explode(".", $min);
+            $min_price = '';
+            foreach ($min_array as $key => $value) {
+                $min_price = $min_price . $min_array[$key];
+            }
+        } else {
+            $min_price = PGDurasi::min('durasi_harga');
+        }
+
+        if (!empty($request->max_price)) {
+            $max  = $request->max_price;
+            $max_array = explode(".", $max);
+            $max_price = '';
+            foreach ($max_array as $key => $value) {
+                $max_price = $max_price . $max_array[$key];
+            }
+        } else {
+            $max_price = PGDurasi::max('durasi_harga');
+
+        }
+
+        if($tag_id == 'all'){
+            $allThemes = PGPackage::where('status', '1')
+                            ->whereBetween('pg_price', [$min_price, $max_price])
+                            ->orderBy('pg_price', 'asc')->get();
+            // if($theme != 'All_theme' && !empty($theme)){    
+            //     $allThemes = PGPackage::where('status', '1')
+            //                 ->join('pg_package_type', 'pg_package_type.package_id', '=', 'pg_package.id')
+            //                 ->join('pg_type', 'pg_type.id', '=', 'pg_package_type.type_id')
+            //                 ->where('pg_type', $theme)
+            //                 ->whereBetween('pg_price', [$min_price, $max_price])
+            //                 ->orderBy('pg_price', 'asc')->get();
+            // } elseif($type != 'All_type' && !empty($type) && $theme != 'All_theme'  && !empty($theme)){    
+            //     $allThemes = PartnerTag::where('ps_package_tag.tag_id', $theme)
+            //                 ->join('ps_package', 'ps_package.id', '=', 'ps_package_tag.package_id')
+            //                 ->where('ps_package.status', '1')
+            //                 ->where('ps_package.pkg_category_them', $type)
+            //                 ->whereBetween('ps_package.pg_price', [$min_price, $max_price])
+            //                 ->orderBy('ps_package.pg_price', 'asc')->get();
+            // } elseif($type == 'All_type' && $theme != 'All_theme'  && !empty($theme)){    
+            //     $allThemes = PartnerTag::where('ps_package_tag.tag_id', $theme)
+            //                 ->join('ps_package', 'ps_package.id', '=', 'ps_package_tag.package_id')
+            //                 ->where('ps_package.status', '1')
+            //                 ->whereBetween('ps_package.pg_price', [$min_price, $max_price])
+            //                 ->orderBy('ps_package.pg_price', 'asc')->get();
+            // } elseif($type == 'All_type' && $theme == 'All_theme'){    
+            //     $allThemes = PGPackage::where('status', '1')
+            //                 ->whereBetween('pg_price', [$min_price, $max_price])
+            //                 ->orderBy('pg_price', 'asc')->get();
+            // }
+        }
+
+        elseif($tag_id != 'all'){
+            $allThemes = PGPackage::where('status', '1')
+                        ->whereBetween('pg_price', [$min_price, $max_price])
+                        ->join('pg_package_type', 'pg_package_type.package_id', '=', 'pg_package.id')
+                        ->where('pg_package_type.type_id', $tag_id)
+                        ->distinct()
+                        ->orderBy('pg_price', 'asc')->get();
+            // if($request->type != 'All_type' && !empty($request->type)){              
+            //     $allThemes = PartnerTag::where('ps_package_tag.tag_id', $tag_id)
+            //                 ->join('ps_package', 'ps_package.id', '=', 'ps_package_tag.package_id')
+            //                 ->where('ps_package.status', '1')
+            //                 ->where('ps_package.pkg_category_them', $request->type)
+            //                 ->where('ps_package.sub_category_id', $tag_id)
+            //                 ->whereBetween('ps_package.pg_price', [$min_price, $max_price])
+            //                 ->orderBy('ps_package.pg_price', 'asc')->get();
+            // }
+        }
+        
+        if(!empty($allThemes[0]) || !empty($freespot[0])) {
+            return view('search-result.pg.daftar', ['allThemes' => $allThemes], compact('tag_id', 'tema', 'listtema', 'freespot'));
+        } else {
+            return view('search-result.pg.notfound', ['allThemes' => $allThemes], compact('tag_id', 'tema', 'listtema'));
+        }
+    }
 
 
     public function searchData(Request $request)
