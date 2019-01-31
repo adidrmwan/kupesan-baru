@@ -63,10 +63,6 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->pg_printed == 'Exclude' && $request->pg_printed_frame != 'Exclude') {
-            return Redirect::back()->withInput(Input::all());
-        }
-        // dd($request);
         $user = Auth::user();
         $partner = Partner::where('user_id', $user->id)->first();
 

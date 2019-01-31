@@ -209,7 +209,7 @@
           <label>Ukuran<small><b style="color:red;"> * </b></small></label>
           <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_album_ukuran" required>
               <option selected value="">Pilih</option>
-              <option value="-">Exclude</option>
+              <option value="0">Exclude</option>
               <option value="15 x 10">15 x 10</option>
               <option value="20 x 20">20 x 20</option>
               <option value="20 x 25">20 x 25</option>
@@ -265,7 +265,7 @@
           <label>Ukuran<small><b style="color:red;"> * </b></small></label>
           <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_printed_size" required>
               <option selected value="">Pilih</option>
-              <option value="-">Exclude</option>
+              <option value="Exclude">Exclude</option>
               <option value="15 x 10">15 x 10</option>
               <option value="20 x 20">20 x 20</option>
               <option value="20 x 25">20 x 25</option>
@@ -346,7 +346,7 @@
           <label>Disimpan di<small><b style="color:red;"> * </b></small></label>
           <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_edited_saved" required>
               <option selected value="">Pilih</option>
-              <option value="-">Exclude</option>
+              <option value="Exclude">Exclude</option>
               <option value="CD/DVD">CD/DVD</option>
               <option value="Flashdisk">Flashdisk</option>
               <option value="CD/DVD/Flashdisk">CD/DVD/Flashdisk</option>
