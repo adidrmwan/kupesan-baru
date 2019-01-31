@@ -18,6 +18,12 @@
                     <img style="height: auto; width: 250px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pkg_img_them.'.jpeg')  }}" alt= "Package Image" />
                     @elseif(File::exists(public_path("img_pkg/".$data->pkg_img_them.".png")))
                     <img style="height: auto; width: 250px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pkg_img_them.'.png')  }}" alt= "Package Image" />
+                    @elseif(File::exists(public_path("img_pkg/".$data->pkg_img_them.".JPG")))
+                    <img style="height: auto; width: 250px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pkg_img_them.'.JPG')  }}" alt= "Package Image" />
+                    @elseif(File::exists(public_path("img_pkg/".$data->pkg_img_them.".JPEG")))
+                    <img style="height: auto; width: 250px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pkg_img_them.'.JPEG')  }}" alt= "Package Image" />
+                    @elseif(File::exists(public_path("img_pkg/".$data->pkg_img_them.".PNGpng")))
+                    <img style="height: auto; width: 250px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pkg_img_them.'.PNGpng')  }}" alt= "Package Image" />
                     @endif
                   </th>
                 </tr>

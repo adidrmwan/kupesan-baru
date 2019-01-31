@@ -66,11 +66,20 @@
                                                     </a>
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".png")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_1.'.png')  }}" title="image-1" class="with-caption gallery image-link">
-                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.png')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".jpeg")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_1.'.jpeg')  }}" title="image-1" class="with-caption gallery image-link">
-                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.jpeg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".JPG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_1.'.JPG')  }}" title="image-1" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.JPG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".JPEG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_1.'.JPEG')  }}" title="image-1" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.JPEG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".PNG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_1.'.PNG')  }}" title="image-1" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.PNG')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @endif
                                                 </div>
@@ -87,11 +96,20 @@
                                                     </a>
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_2.".png")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_2.'.png')  }}" title="image-2" class="with-caption gallery image-link">
-                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.png')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_2.".jpeg")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_2.'.jpeg')  }}" title="image-2" class="with-caption gallery image-link">
-                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.jpeg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_2.".JPG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_2.'.JPG')  }}" title="image-2" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.JPG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_2.".JPEG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_2.'.JPEG')  }}" title="image-2" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.JPEG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_2.".PNG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_2.'.PNG')  }}" title="image-2" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.PNG')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @endif
                                                 </div>
@@ -108,11 +126,20 @@
                                                     </a>
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_3.".png")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_3.'.png')  }}" title="image-3" class="with-caption gallery image-link">
-                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.png')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_3.".jpeg")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_3.'.jpeg')  }}" title="image-3" class="with-caption gallery image-link">
-                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.jpeg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_3.".JPG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_3.'.JPG')  }}" title="image-3" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.JPG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_3.".JPEG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_3.'.JPEG')  }}" title="image-3" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.JPEG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_3.".PNG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_3.'.PNG')  }}" title="image-3" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.PNG')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @endif
                                               </div>
@@ -129,11 +156,20 @@
                                                     </a>
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".png")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_4.'.png')  }}" title="image-4" class="with-caption gallery image-link">
-                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.png')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".jpeg")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_4.'.jpeg')  }}" title="image-4" class="with-caption gallery image-link">
-                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.jpeg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".JPG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_4.'.JPG')  }}" title="image-4" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.JPG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".JPEG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_4.'.JPEG')  }}" title="image-4" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.JPEG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".PNG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_4.'.PNG')  }}" title="image-4" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.PNG')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @endif
                                                 </div>
