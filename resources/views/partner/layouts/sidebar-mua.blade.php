@@ -1,29 +1,29 @@
 <li>
-    <a href="{{ route('booking.schedule') }}">
+    <a href="{{ route('mua.schedule') }}">
         <i class="pe-7s-note2"></i>
         <p>Booking Schedule</p>
     </a>
 </li>
 <li>
-    <a href="{{ route('form.offline') }}">
+    <a href="{{ route('mua.off-booking') }}">
         <i class="pe-7s-note2"></i>
         <p>Offline Booking</p>
     </a>
 </li>
 <li>
-    <a href="{{ route('form.dayoff') }}">
+    <a href="{{ route('mua.form.dayoff') }}">
         <i class="pe-7s-note2"></i>
         <p>Form Day-Off</p>
     </a>
 </li>
 <li>
-    <a href="{{ route('booking.history') }}">
+    <a href="{{ route('mua.history') }}">
         <i class="pe-7s-server"></i>
         <p>Booking History</p>
     </a>
 </li>
 <li>
-    <a href="{{ route('partner.profile') }}">
+    <a href="{{ route('mua.profile') }}">
         <i class="pe-7s-user"></i>
         <p>Partner Profile</p>
     </a>
@@ -40,13 +40,13 @@
     </a>
     <ul class="list-unstyled" id="pageSubmenu">
         <li style="margin-left: 35px;">
-            <a href="{{ route('partner.addpackage') }}">
+            <a href="{{ route('mua-package.create') }}">
                 <i class="pe-7s-plus"></i>
                 <p> Add Package </p>
             </a>
         </li>
         <li style="margin-left: 35px;">
-            <a href="{{ route('partner.listpackage') }}">
+            <a href="{{ route('mua-package.index') }}">
                 <i class="pe-7s-note2"></i>
                 <p> List Package </p>
             </a>

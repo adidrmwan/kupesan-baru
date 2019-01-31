@@ -17,8 +17,24 @@ Route::group(['middleware' => ['auth','role:partner']], function(){
             Route::get('profile', 'PartnerController@profile')->name('pg.profile');
             Route::post('profile', 'PartnerController@updateProfile')->name('pg.profile.update');
 
+
         });
 
+    });
+
+    Route::namespace('Mua')
+    ->group(function () {
+        Route::resource('mua-package', 'MuaPackageController');
+        Route::group(['prefix' => 'mua'], function(){
+            Route::get('profile', 'MuaPartnerController@profile')->name('mua.profile');
+            Route::post('profile', 'MuaPartnerController@updateProfile')->name('mua.profile.update');
+            Route::get('schedule', 'MuaPartnerController@showBookingSchedule')->name('mua.schedule');
+            Route::get('/booking/offline/3/1', 'MuaBookingController@showStep1')->name('mua.off-booking');
+            Route::get('/form/dayoff/3', 'MuaPartnerController@showFormDayOff')->name('mua.form.dayoff');
+            Route::post('/form/dayoff/3', 'MuaPartnerController@submitFormDayOff')->name('mua.form.dayoff.submit');
+            Route::get('/booking/history/3', 'MuaPartnerController@showBookingHistory')->name('mua.history');
+
+        });
     });
     // fotostudio
     Route::get('/booking/ps/schedule', 'PartnerController@showBookingSchedule')->name('booking.schedule');
