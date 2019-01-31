@@ -173,7 +173,7 @@ class PackageController extends Controller
             $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
             Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
             $user = Auth::user();
-            $package= PGPkg::where('partner_id',$user->id)->first();
+            $package= PGPackage::where('partner_id',$user->id)->first();
             $package->save();
         }
 
@@ -198,7 +198,7 @@ class PackageController extends Controller
             $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
             Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
             $user = Auth::user();
-            $package= PGPkg::where('partner_id',$user->id)->first();
+            $package= PGPackage::where('partner_id',$user->id)->first();
             $package->save();
         }
 
@@ -223,7 +223,7 @@ class PackageController extends Controller
             $foto_name = $foto_new . '.' .$foto->getClientOriginalExtension();
             Image::make($foto)->save( public_path('/img_pkg/' . $foto_name ) );
             $user = Auth::user();
-            $package= PGPkg::where('partner_id',$user->id)->first();
+            $package= PGPackage::where('partner_id',$user->id)->first();
             $package->save();
         }
 
@@ -443,7 +443,16 @@ class PackageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+
+    public function deletePackage(Request $request)
+    {
+        $id = $request->id;
+        $package = PGPackage::findOrFail($id);
+        $package->status = '0';
+        $package->save();
+        return redirect()->intended(route('pg-package.index')); 
     }
 
 }

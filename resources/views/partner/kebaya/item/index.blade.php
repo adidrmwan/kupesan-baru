@@ -85,7 +85,7 @@
                                         </td> 
                                         @endif  
                                     </tr>
-                                    @endforeach
+                                    @endforeacH
                                 </tbody>
                             </table>
                         </div>

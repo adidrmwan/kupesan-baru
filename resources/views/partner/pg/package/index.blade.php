@@ -51,11 +51,9 @@
                                     </a>
                                 </td>   
                                 <td>
-                                    <form role="form" action="{{route('partner.deletepackage')}}" method="post" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                      <input type="text" name="id" value="{{$data->id}}" hidden="">
-                                      <button type="submit" class="btn btn-danger pull-right" onclick="return confirm('Are you sure want to delete this package?')">Delete</button>
-                                    </form>
+                                    <a href="{{route('delete.pg.package', ['package_id' => $data->id])}}" class="btn btn-info btn-sm pull-right" onclick="return confirm('Are you sure want to Delete?')">Delete</a>
+
+
                                 </td>
                             </tr>
                             @endforeach
