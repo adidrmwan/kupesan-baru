@@ -12,9 +12,11 @@ Route::group(['middleware' => ['auth','role:partner']], function(){
     Route::namespace('Photographer')
     ->group(function () {
         Route::resource('pg-package', 'PackageController');
+        Route::get('/pg-package/delete', 'PackageController@deletePackage')->name('delete.pg.package');
         Route::group(['prefix' => 'pg'], function(){
             Route::get('profile', 'PartnerController@profile')->name('pg.profile');
             Route::post('profile', 'PartnerController@updateProfile')->name('pg.profile.update');
+
         });
 
     });
