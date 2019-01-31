@@ -105,6 +105,10 @@ Route::group(['prefix' => '2', 'middleware' => ['auth','role:user']], function()
         Route::group(['prefix' => 'booking/pg'], function(){
             Route::get('2', 'BookingController@step2')->name('pg.step2');
             Route::post('2', 'BookingController@submitStep2')->name('pg.submit.step2');
+            Route::get('2a', 'BookingController@step2a')->name('pg.step2a');
+            Route::post('2a', 'BookingController@submitStep2a')->name('pg.submit.step2a');
+            Route::get('3', 'BookingController@step3')->name('pg.step3');
+            Route::post('3', 'BookingController@submitStep3')->name('pg.submit.step3');
         });
 
     });
