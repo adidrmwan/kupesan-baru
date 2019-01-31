@@ -181,13 +181,56 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Fotografer</label>
+                                                <label>MUA/Penata Rias</label>
                                                 <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_mua" required>
                                                     <option selected value="{{$data->pg_mua}}">{{$data->pg_mua}}</option>
                                                     @if($data->pg_mua != 'Include')
                                                     <option value="Include">Include</option>
                                                     @endif
                                                     @if($data->pg_mua != 'Exclude')
+                                                    <option value="Exclude">Exclude</option>
+                                                    @endif
+                                                </select>
+                                                <div class="invalid-feedback">Wajib diisi.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Stylist</label>
+                                                <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_stylist" required>
+                                                    <option selected value="{{$data->pg_stylist}}">{{$data->pg_stylist}}</option>
+                                                    @if($data->pg_stylist != 'Include')
+                                                    <option value="Include">Include</option>
+                                                    @endif
+                                                    @if($data->pg_stylist != 'Exclude')
+                                                    <option value="Exclude">Exclude</option>
+                                                    @endif
+                                                </select>
+                                                <div class="invalid-feedback">Wajib diisi.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5 style="text-align: center; ">Album Kolase</h5>
+                                    <small style="color: grey;">Jika Exclude Album Kolase:
+                                      <ul>
+                                        <li>Ukuran: Exclude.</li>
+                                        <li>Jumlah Halaman: 0.</li>
+                                        <li>Jumlah Foto: 0</li>
+                                      </ul>
+                                    </small>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Album Kolase</label>
+                                                <select  class="form-control" id="inlineFormCustomSelectPref" name="pg_album_kolase" required>
+                                                    <option selected value="{{$data->pg_album_kolase}}">{{$data->pg_album_kolase}}</option>
+                                                    @if($data->pg_album_kolase != 'Include')
+                                                    <option value="Include">Include</option>
+                                                    @endif
+                                                    @if($data->pg_album_kolase != 'Exclude')
                                                     <option value="Exclude">Exclude</option>
                                                     @endif
                                                 </select>
@@ -232,7 +275,7 @@
 @section('script')
 <script type="text/javascript">
 $(document).on('click', '.addJam', function(){
-    var html = '<div class="row"><div class="col-md-5"><select  class="form-control" id="inlineFormCustomSelectPref" name="durasi_jam[]" required><option selected value="">Pilih Durasi Paket</option><option value="1">1 Jam</option><option value="2">2 Jam</option><option value="3">3 Jam</option><option value="4">4 Jam</option><option value="5">5 Jam</option></select><div class="invalid-feedback">Wajib diisi.</div></div><div class="col-md-7"><div class="input-group mb-4"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Rp</span></div><input class="form-control number" placeholder="Harga Paket" min="1000" name="durasi_harga[]" required><div class="invalid-feedback">Wajib diisi.</div></div></div></div>';
+    var html = '<div class="row"><div class="col-md-5"><select  class="form-control" id="inlineFormCustomSelectPref" name="durasi_jam[]" required><option selected value="">Pilih Durasi Paket</option><option value="1">1 Jam</option><option value="2">2 Jam</option><option value="3">3 Jam</option><option value="4">4 Jam</option><option value="5">5 Jam</option><option value="6">6 Jam</option><option value="7">7 Jam</option><option value="8">8 Jam</option><option value="9">9 Jam</option><option value="10">10 Jam</option><option value="11">11 Jam</option><option value="12">12 Jam</option><option value="13">13 Jam</option><option value="14">14 Jam</option><option value="15">15 Jam</option><option value="16">16 Jam</option><option value="17">17 Jam</option><option value="18">18 Jam</option><option value="19">19 Jam</option><option value="20">20 Jam</option><option value="20">20 Jam</option><option value="21">21 Jam</option><option value="22">22 Jam</option><option value="23">23 Jam</option><option value="24">1 Hari</option></select><div class="invalid-feedback">Wajib diisi.</div></div><div class="col-md-7"><div class="input-group mb-4"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Rp</span></div><input class="form-control number" placeholder="Harga Paket" min="1000" name="durasi_harga[]" required><div class="invalid-feedback">Wajib diisi.</div></div></div></div>';
   $(this).parent().append(html);
 });
 </script>
