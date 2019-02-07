@@ -32,52 +32,133 @@
                                             </div>
                                             <div class="row">
                                               <div class="col-md-12"> 
-                                                <div class="form-group text-center">
-                                                  <label>Tanggal Penerimaan</label>
-                                                  <input type="text" class="form-control text-center" value="{{ date('d M Y', strtotime($tanggalPenerimaan)) }}" disabled="">
+                                                <div class="form-group">
+                                                  <label>Tanggal Pemotretan</label>
+                                                  <input type="text" class="form-control text-center" value="{{ date('d M Y', strtotime($tanggalPenyewaan)) }}" disabled="">
                                                 </div>
                                               </div>
                                             </div>
+                                            <hr>
                                             <div class="row">
-                                              <div class="col-md-12"> 
-                                                <div class="form-group text-center">
-                                                  <label>Jam Mulai</label>
-                                                  <select class="form-control text-center" name="jam_mulai" required>
-                                                      <option value="" disable="true" class="text-center" selected="true">Pilih Jam Mulai</option>
-                                                      @foreach($jam as $list)
-                                                        @if($list->id < 10)
-                                                        <option value="{{$list->id}}">0{{$list->num_hour}}:00</option>
-                                                        @else
-                                                        <option value="{{$list->id}}">{{$list->num_hour}}:00</option>
-                                                        @endif
-                                                      @endforeach
-                                                    </select>
-                                                </div>
+                                              <div class="col-md-12">
+                                                <p style="text-align: center;">Masukkan lokasi pemotretan, maksimal <b style="color: #EA410C;">{{$makslokasi}} lokasi.</b></p>
                                               </div>
                                             </div>
-                                        </div>          
-                                    </div>
-                                </div>
-                            </div>
+            @for ($i = 1; $i <= $makslokasi; $i++)
+              @if($i == 1)
+              <div class="row">
+                  <div class="col-md-12">
+                    <h5><span class="label label-default">Lokasi {{ $i }}</span></h5>
+                      <div class="form-group">
+                          <label>Nama Lokasi<small><b style="color: red;"> *</b></small></label>
+                          <input type="text" class="form-control text-center" placeholder="Nama lokasi pemotretan" name="location_name_1" required="">
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Provinsi<small><b style="color: red;"> *</b></small></label>
+                        <select class="form-control" name="loc_prov" id="provinces" required="">
+                            <option value="" disable="true" selected="true">Pilih Provinsi</option>
+                            @foreach ($provinces as $key => $value)
+                            <option value="{{$value->id}}">{{ $value->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Kota/Kabupaten<small><b style="color: red;"> *</b></small></label>
+                        <select class="form-control" name="loc_kota" id="regencies" required="">
+                          <option value="" disable="true" selected="true">Pilih Kota/Kabupaten</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Kecamatan<small><b style="color: red;"> *</b></small></label>
+                        <select class="form-control" name="loc_kec" id="districts" required="">
+                          <option value="" disable="true" selected="true">Pilih Kecamatan</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Kelurahan<small><b style="color: red;"> *</b></small></label>
+                        <select class="form-control" name="loc_kel" id="villages" required="">
+                          <option value="" disable="true" selected="true">Pilih Kelurahan</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Kode Pos<small><b style="color: red;"> *</b></small></label>
+                        <input type="text" class="form-control text-center" placeholder="Kode Pos" name="loc_postal_code" required="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Alamat Lengkap<small><b style="color: red;"> *</b></small></label>
+                        <textarea class="form-control text-center" placeholder="Tuliskan lokasi pemotretan dengan lengkap" name="location_detail_1"  style="resize: none; height: 100px;" required=""></textarea>
+                    </div>
+                </div>
+            </div>
+            @else
+            <div class="row">
+                <div class="col-md-12">
+                  <h5><span class="label label-default">Lokasi {{ $i }}</span></h5>
+                    <div class="form-group">
+                        <label>Nama Lokasi<small><b style="color: red;"> *</b></small></label>
+                        <input type="text" class="form-control text-center" placeholder="Nama lokasi pemotretan" name="location_name[]" required="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Alamat Lengkap<small><b style="color: red;"> *</b></small></label>
+                        <textarea class="form-control text-center" placeholder="Tuliskan lokasi pemotretan dengan lengkap" name="location_detail[]"  style="resize: none; height: 100px;" required=""></textarea>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endfor
+                    <hr>
+                </div>          
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table">
+                                <tr>
+                                    <th>Informasi Tambahan</th>
+                                </tr>
+                                @foreach($package as $value)
+                                <tr>
+                                    @if(empty($value->description))
+                                    <td>Tidak ada informasi tambahan.</td>
+                                    @else
+                                    <td>{{$value->description}}</td>
+                                    @endif
+                                </tr>
+                                @endforeach
+                            </table>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <table class="table">
-                                    <tr>
-                                        <th>Informasi Tambahan</th>
-                                    </tr>
-                                    @foreach($package as $value)
-                                    <tr>
-                                        @if(empty($value->description))
-                                        <td>Tidak ada informasi tambahan.</td>
-                                        @else
-                                        <td>{{$value->description}}</td>
-                                        @endif
-                                    </tr>
-                                    @endforeach
-                                </table>
-                            </div>
-                        </div>
+                    </div>
                     <div class="lg-booking-form">
                         <input type="text" name="booking_id" value="{{$booking_id}}" hidden="">
                         <div class="checkbox col-xs-12 col-sm-12 col-md-12 col-lg-12"  >

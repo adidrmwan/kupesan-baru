@@ -47,6 +47,23 @@
                                                         </div>
                                                       </div>
                                                     </div>
+                                                  <div class="row">
+                                                    <div class="col-md-12"> 
+                                                      <div class="form-group text-center">
+                                                        <label>Jam Mulai</label>
+                                                        <select class="form-control text-center" name="jam_mulai" required>
+                                                            <option value="" disable="true" class="text-center" selected="true">Pilih Jam Mulai</option>
+                                                            @foreach($jam as $list)
+                                                              @if($list->id < 10)
+                                                              <option value="{{$list->id}}">0{{$list->num_hour}}:00</option>
+                                                              @else
+                                                              <option value="{{$list->id}}">{{$list->num_hour}}:00</option>
+                                                              @endif
+                                                            @endforeach
+                                                          </select>
+                                                      </div>
+                                                    </div>
+                                                  </div>
                                                 </div>
                                               </div>
                                             </div>

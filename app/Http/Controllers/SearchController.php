@@ -279,7 +279,7 @@ class SearchController extends Controller
         if (!empty($request->theme)) {
             $tag_id = $request->theme;
         }
-        $tema = DB::table('partner_type')->where('id', $tag_id)->first();
+        $tema = DB::table('pg_type')->where('id', $tag_id)->first();
         $listtema = PGPackageType::join('pg_type', 'pg_type.id', '=', 'pg_package_type.type_id')
                 ->distinct()->orderBy('type_name', 'asc')->get(['pg_type.id', 'pg_type.type_name']);
         $theme = $request->theme;

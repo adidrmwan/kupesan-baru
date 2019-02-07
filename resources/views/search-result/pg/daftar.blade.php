@@ -1,5 +1,5 @@
 @extends('layouts.master-studio')
-@section('title', 'Spot Foto')
+@section('title', 'Fotografer')
 @section('content')
 <section class="innerpage-wrapper">
     <div id="search-result-page" class="top-section-padding">
@@ -87,11 +87,11 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 content-side">
                     <div class="col-sm-12 col-md-12">
-                        <h3><b>SPOT FOTO</b></h3> 
+                        <h3><b>FOTOGRAFER</b></h3> 
                     </div>
                     <div class="col-sm-12 col-md-12">
                         @if(empty($tema->type_name))
-                        <h3><b><span style="color: #FF0073;">Semua </span> Spot di <span style="color: #FF0073;">Kota Surabaya</span></b></h3>
+                        <h3><b><span style="color: #FF0073;">Semua </span> Fotografer di <span style="color: #FF0073;">Kota Surabaya</span></b></h3>
                         @else
                         <h3><b><span style="color: #FF0073;">{{$tema->type_name}}</span> di <span style="color: #FF0073;">Kota Surabaya</span></b></h3> 
                         @endif
@@ -109,14 +109,6 @@
                         @include('search-result.pg.paket')
                     </div>
                     @endforeach
-                    
-                    @if(!empty($freespot[0]))
-                    @foreach($freespot as $data)
-                    <div class="col-sm-6 col-md-4">
-                        @include('search-result.pg.freepaket')
-                    </div>
-                    @endforeach
-                    @endif
                 </div>
 
             </div>
