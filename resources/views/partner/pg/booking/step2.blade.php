@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                  <form role="form" action="{{ route('kebaya.off-booking.step2.submit') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                  <form role="form" action="{{ route('pg.off-booking.step2.submit') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                   {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-12">
@@ -20,41 +20,15 @@
                                   <div class="col-lg-12">
                                     <div class="row">
                                       <div class="col-lg-12">
-                                        <h5>Durasi Sewa</h5>
-                                        <small><b style="color: red;">*</b> Durasi sewa yaitu 3 hari dari tanggal mulai sewa.</small>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-lg-12">
                                         <div class="form-group">
-                                          <label>Durasi Sewa</label>
-                                          <select class="form-control" required="" name="durasi_paket">
-                                            <option value="" selected="">Pilih Durasi Sewa</option>
-                                            @foreach($biayaSewa as $value)
-                                            <option value="{{$value->kebaya_durasi_hari}}">{{$value->kebaya_durasi_hari}} Hari</option>
-                                            @endforeach
-                                          </select>
-                                          <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-lg-12">
-                                        <div class="form-group">
-                                          <label>Tanggal Mulai</label> 
+                                          <label>Tanggal Pemesanan</label> 
                                           <input  class="form-control" id="startDate" name="start_date" data-date-format="yyyy-mm-dd" required="" placeholder="Tanggal Mulai">
                                           <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                       </div>
-                                      <!-- <div class="col-md-6">
-                                        <div class="form-group">
-                                          <label>Tanggal Selesai</label> 
-                                          <input  class="form-control" id="endDate" name="end_date" data-date-format="yyyy-mm-dd" placeholder="Tanggal Selesai" />
-                                        </div>
-                                      </div> -->
                                     </div>
-                                    <!-- 
-
+                                  </div>
+                                </div> 
                                     <div class="row">
                                       <div class="col-md-12">
                                         <h5>Detail Pelanggan</h5>
@@ -63,7 +37,7 @@
                                     <div class="row">
                                       <div class="col-md-12">
                                         <div class="form-group">
-                                          <label>Nama</label> 
+                                          <label>Nama</label><span style="color: red;">*</span>
                                           <input type="text" class="form-control" name="user_name" placeholder="Nama" required="">
                                           <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
@@ -78,14 +52,12 @@
                                       </div>
                                       <div class="col-md-5">
                                         <div class="form-group">
-                                          <label>No HP</label> 
+                                          <label>No HP</label><span style="color: red;">*</span>
                                           <input type="text" class="form-control" name="user_nohp" placeholder="No HP" required="">
                                           <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                       </div>
-                                    </div> -->
-                                  </div>
-                                </div> 
+                                    </div>
                                 <div class="row">
                                   <div class="col-md-12">
                                     <input type="text" name="product_id" value="{{$product_id}}" hidden="">
@@ -99,9 +71,9 @@
                   </form>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
               @foreach($package as $data)
-                @include('partner.kebaya.booking.kebaya-paket')
+                @include('partner.pg.booking.paket')
               @endforeach
             </div>
         </div>

@@ -19,6 +19,18 @@ Route::group(['middleware' => ['auth','role:partner']], function(){
             Route::post('profile', 'PartnerController@updateProfile')->name('pg.profile.update');
             Route::get('approve/booking', 'AdminController@approveBooking')->name('pg.partner.approve.booking');
             Route::get('cancel/booking', 'PartnerController@cancelBooking')->name('pg.partner.cancel.booking');
+            Route::get('offline/1', 'PartnerController@showStep1')->name('pg.off-booking');
+            Route::get('offline/2', 'PartnerController@showStep2')->name('pg.off-booking.step2');
+            Route::post('offline/2', 'PartnerController@submitStep2')->name('pg.off-booking.step2.submit');
+            Route::get('offline/3', 'PartnerController@showStep3')->name('pg.off-booking.step3');
+            Route::post('offline/3', 'PartnerController@submitStep3')->name('pg.off-booking.step3.submit');
+            Route::post('offline/4', 'PartnerController@submitStep4')->name('pg.off-booking.step4.submit');
+            Route::get('schedule', 'PartnerController@showBookingSchedule')->name('pg.schedule');
+            Route::get('schedule/detail', 'PartnerController@showDetailBooking')->name('pg.detail.booking');
+            Route::get('finished', 'PartnerController@bookingFinished')->name('pg.booking.finished');
+            Route::get('finished/online', 'PartnerController@bookingFinishedOnline')->name('pg.booking.finished.online');
+            Route::get('offline/cancel', 'PartnerController@offlineCancel')->name('pg.booking.cancel');
+            Route::get('history', 'PartnerController@showBookingHistory')->name('pg.history');
         });
 
     });

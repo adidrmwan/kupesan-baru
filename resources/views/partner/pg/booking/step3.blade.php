@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                  <form role="form" action="{{ route('kebaya.off-booking.step3.submit') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                  <form role="form" action="{{ route('pg.off-booking.step3.submit') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                   {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-12">
@@ -24,21 +24,7 @@
                                     <div class="row">
                                       <div class="col-md-12">
                                         <h5></h5>
-                                        <small><b style="color: red;">*</b> Tersedia <b>{{$quantity2}}</b> kebaya pada tanggal <b>{{ date('d F Y', strtotime($booking->start_date)) }}</b> sampai dengan <b>{{ date('d F Y', strtotime($booking->end_date)) }}</b>.</small>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-md-12">
-                                        <div class="form-group">
-                                          <label>Kuantitas</label>
-                                          <select class="form-control" required="" name="quantity">
-                                            <option value="" selected="">Pilih Banyaknya Produk</option>
-                                            @for ($i = 1; $i <= $quantity2; $i++) 
-                                            <option value="{{$i}}">{{$i}}</option>
-                                            @endfor
-                                          </select>
-                                          <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
+                                        <small><b style="color: red;">*</b> Tersedia jadwal pada tanggal <b>{{ date('l, d F Y', strtotime($booking->start_date)) }}.</small>
                                       </div>
                                     </div>
                                     <div class="row">
@@ -50,7 +36,7 @@
                                       <div class="col-md-12">
                                         <div class="form-group">
                                           <label>Nama <b style="color: red;">*</b></label> 
-                                          <input type="text" class="form-control" name="user_name" placeholder="Nama Pelanggan" required="">
+                                          <input type="text" class="form-control" name="user_name" placeholder="Nama Pelanggan" value="{{$booking->user_name}}" disabled="">
                                           <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                       </div>
@@ -59,14 +45,14 @@
                                       <div class="col-md-5">
                                         <div class="form-group">
                                           <label>No HP <b style="color: red;">*</b></label> 
-                                          <input type="text" class="form-control" name="user_nohp" placeholder="No Handphone" required="">
+                                          <input type="text" class="form-control" name="user_nohp" placeholder="No Handphone" value="{{$booking->user_nohp}}" disabled="">
                                           <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                       </div>
                                       <div class="col-md-7">
                                         <div class="form-group">
                                           <label>E-mail</label> <small>(Optional)</small>
-                                          <input type="text" class="form-control" name="user_email" placeholder="E-mail">
+                                          <input type="text" class="form-control" name="user_email" placeholder="E-mail" value="{{$booking->user_email}}" disabled="">
                                         </div>
                                       </div>
                                     </div>
@@ -87,9 +73,9 @@
                   </form>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
               @foreach($package as $data)
-                @include('partner.kebaya.booking.kebaya-paket')
+                @include('partner.pg.booking.paket')
               @endforeach
             </div>
         </div>

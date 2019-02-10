@@ -1,11 +1,11 @@
 <li>
-    <a href="{{ route('booking.schedule') }}">
+    <a href="{{ route('pg.schedule') }}">
         <i class="pe-7s-note2"></i>
         <p>Booking Schedule</p>
     </a>
 </li>
 <li>
-    <a href="{{ route('form.offline') }}">
+    <a href="{{ route('pg.off-booking') }}">
         <i class="pe-7s-note2"></i>
         <p>Offline Booking</p>
     </a>
@@ -17,7 +17,7 @@
     </a>
 </li>
 <li>
-    <a href="{{ route('booking.history') }}">
+    <a href="{{ route('pg.history') }}">
         <i class="pe-7s-server"></i>
         <p>Booking History</p>
     </a>

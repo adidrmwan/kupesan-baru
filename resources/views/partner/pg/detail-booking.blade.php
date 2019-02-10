@@ -40,24 +40,28 @@
                                                 </tr>
                                             </thead>
                                             <tr>
-                                                <td colspan="2" style="text-align: center;"><b>{{$package->pkg_name_them}}</b></td>
+                                                <td colspan="2" style="text-align: center;"><b>{{$package->pg_name}}</b></td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 50%;">Tanggal Sewa</td>
-                                                <td style="width: 50%;">{{ date('d F Y', strtotime($data->start_date)) }} s/d<br> {{ date('d F Y', strtotime($data->end_date)) }}</td>
+                                                <td>Tanggal Pemesanan</td>
+                                                <td>{{ date('l, d F Y', strtotime($booking2->start_date)) }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Tipe / Set Paket</td>
-                                                <td>{{$data->category_name}} / {{$data->set}}</td>
+                                                <td>Waktu Pemesanan</td>
+                                                <td>{{ date('H:i A', strtotime($booking2->start_date)) }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Ukuran</td>
-                                                <td>{{$data->size}}</td>
+                                                <td>MUA / Stylist</td>
+                                                <td>{{$package->pg_mua}} / {{$package->pg_stylist}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>Kuantitas Pesanan</td>
-                                                <td>{{$data->kuantitas}} pcs</td>
-                                            </tr>
+                                              <tr>
+                                                <td>Lokasi</td>
+                                                <td>
+                                                    @foreach($pglog as $key => $value)
+                                                    <small>{{$key+1}} : {{$value->loc_name}} - {{$value->loc_addr}}</small><br>
+                                                    @endforeach
+                                                </td>
+                                              </tr>
                                         </table>
                                     </div>
                                 </div>
@@ -97,12 +101,12 @@
                                 @elseif($flag_date == '1')
                                     @if($data->booking_status == 'offline-booking')
                                     <small>* Jika pesanan ini sudah selesai, klik tombol dibawah ini.</small>
-                                    <a href="{{route('kebaya.booking.finished', ['id' => $data->booking_id])}}">
+                                    <a href="{{route('pg.booking.finished', ['id' => $data->booking_id])}}">
                                         <button type="submit" class="btn btn-block btn-info pull-right" onclick="return confirm('Are you sure want to complete this booking?')"><i class="fa fa-check"></i> Order Complete</button>
                                     </a>
                                     @elseif($data->booking_status == 'confirmed')
                                     <small>* Jika pesanan ini sudah selesai, klik tombol dibawah ini.</small>
-                                    <a href="{{route('kebaya.booking.finished.online', ['id' => $data->booking_id])}}">
+                                    <a href="{{route('pg.booking.finished.online', ['id' => $data->booking_id])}}">
                                         <button type="submit" class="btn btn-block btn-info pull-right" onclick="return confirm('Are you sure want to complete this booking?')"><i class="fa fa-check"></i> Order Complete</button>
                                     </a>
                                     @endif

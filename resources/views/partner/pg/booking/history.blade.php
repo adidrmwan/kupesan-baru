@@ -25,15 +25,14 @@
                           <th>Booking Code</th>
                           <th>Package ID</th>
                           <th>Package Name</th>
-                          <th>Size</th>
-                          <th>Set</th>
-                          <th>Quantity</th>
+                          <th>MUA</th>
+                          <th>Stylist</th>
                           <th>Start Date</th>
-                          <th>End Date</th>
+                          <th>Start Time</th>
                           <th>Name (Customer)</th> 
                           <th>Phone (Customer)</th> 
                           <th>Status</th>
-                          <th>Total (Rp)</th> 
+                          <th>Total (Rp)</th>
                       </thead>
                       <tbody>
                         @foreach($booking as $key => $data)
@@ -41,12 +40,11 @@
                           <td>{{$key + 1}}</td>
                           <td class="text-uppercase">{{$data->kode_booking}}</td>
                           <td>{{$data->package_id}}</td>
-                          <td>{{$data->name}}</td>
-                          <td>{{$data->size}}</td>
-                          <td>{{$data->set}}</td>
-                          <td>{{$data->quantity}}</td>
-                          <td>{{\Carbon\Carbon::parse($data->start_date)->format('d M Y')}}</td>
-                          <td>{{\Carbon\Carbon::parse($data->end_date)->format('d M Y')}}</td>
+                          <td>{{$data->pg_name}}</td>
+                          <td>{{$data->pg_mua}}</td>
+                          <td>{{$data->pg_stylist}}</td>
+                          <td>{{ date('l, d F Y', strtotime($data->start_date)) }}</td>
+                          <td>{{ date('H:i A', strtotime($data->start_date)) }}</td>
                           <td>{{$data->user_name}}</td> 
                           <td>{{$data->user_nohp}}</td> 
                           @if($data->booking_status == 'offline-booking-done')
@@ -67,14 +65,13 @@
                           <th>Booking Code</th>
                           <th>Package ID</th>
                           <th>Package Name</th>
-                          <th>Size</th>
-                          <th>Set</th>
-                          <th>Quantity</th>
+                          <th>MUA</th>
+                          <th>Stylist</th>
                           <th>Start Date</th>
-                          <th>End Date</th>
+                          <th>Start Time</th>
                           <th>Name (Customer)</th> 
                           <th>Phone (Customer)</th> 
-                          <th>Total (Rp)</th> 
+                          <th>Total (Rp)</th>
                       </thead>
                       <tbody>
                         @foreach($booking_offline as $key => $data)
@@ -82,12 +79,11 @@
                           <td>{{$key + 1}}</td>
                           <td class="text-uppercase">{{$data->kode_booking}}</td>
                           <td>{{$data->package_id}}</td>
-                          <td>{{$data->name}}</td>
-                          <td>{{$data->size}}</td>
-                          <td>{{$data->set}}</td>
-                          <td>{{$data->quantity}}</td>
-                          <td>{{\Carbon\Carbon::parse($data->start_date)->format('d M Y')}}</td>
-                          <td>{{\Carbon\Carbon::parse($data->end_date)->format('d M Y')}}</td>
+                          <td>{{$data->pg_name}}</td>
+                          <td>{{$data->pg_mua}}</td>
+                          <td>{{$data->pg_stylist}}</td>
+                          <td>{{ date('l, d F Y', strtotime($data->start_date)) }}</td>
+                          <td>{{ date('H:i A', strtotime($data->start_date)) }}</td>
                           <td>{{$data->user_name}}</td> 
                           <td>{{$data->user_nohp}}</td> 
                           <td>Rp. {{number_format($data->booking_total,0,',','.')}}</td> 

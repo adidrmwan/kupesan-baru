@@ -99,7 +99,7 @@
             </div>
             <div class="col-md-4">
               @foreach($package as $data)
-                @include('partner.kebaya.booking.kebaya-paket')
+                @include('partner.pg.booking.paket')
               @endforeach
             </div>
         </div>

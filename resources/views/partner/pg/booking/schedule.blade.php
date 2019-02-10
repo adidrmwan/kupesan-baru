@@ -52,19 +52,14 @@
                 <th>No</th>
                 <th>Kode Booking</th>
                 <th>Package Name</th>
-                <th>Type</th>
-                <th>Size</th>
-                <th>Set</th>
-                <th>Quantity</th>
+                <th>MUA</th>
+                <th>Stylist</th>
                 <th>Start Date</th>
-                <th>End Date</th>
+                <th>Start Time</th>
                 <th>Name (Customer)</th> 
                 <th>Phone (Customer)</th> 
-                  <th>Harga Paket (Rp)</th>
-                  <th>Deposit (Rp)</th>
-                  <th>Dryclean (Rp)</th>
-                  <th>Biaya Kirim (Rp)</th>
-                  <th>Total (Rp)</th>
+                <th>Harga Paket (Rp)</th>
+                <th>Total (Rp)</th>
                 <th>Status</th>
                 <th>Action</th>
               </thead>
@@ -73,30 +68,29 @@
                 <tr>
                   <td>{{$key + 1}}</td>
                   <td class="text-uppercase">{{$data->kode_booking}}</td>
-                  <td>{{$data->name}}</td>
-                  <td>{{$data->category_name}}</td>
-                  <td>{{$data->size}}</td>
-                  <td>{{$data->set}}</td>
-                  <td>{{$data->quantity}}</td>
-                  <td>{{\Carbon\Carbon::parse($data->start_date)->format('d M Y')}}</td>
-                  <td>{{\Carbon\Carbon::parse($data->end_date)->format('d M Y')}}</td>
+                  <td>{{$data->pg_name}}</td>
+                  <td>{{$data->pg_mua}}</td>
+                  <td>{{$data->pg_stylist}}</td>
+                  <td>{{ date('l, d F Y', strtotime($data->start_date)) }}</td>
+                  <td>{{ date('H:i A', strtotime($data->start_date)) }}</td>
                   <td>{{$data->user_name}}</td> 
                   <td>{{$data->user_nohp}}</td> 
-                    @include('superadmin.kebaya.detail-harga-kebaya')
+                  <td>{{number_format($data->booking_price, 0, ',', '.')}}</td>
+                  <td>{{number_format($data->booking_total, 0, ',', '.')}}</td>
                   @if($data->booking_status == 'offline-booking')
                   <td><h5><span class="badge badge-pill badge-warning">Off</span></h5></td> 
                   <td style="text-align: center;">
-                    <a href="{{route('kebaya.booking.cancel', ['id' => $data->booking_id])}}">
+                    <a href="{{route('pg.booking.cancel', ['id' => $data->booking_id])}}">
                       <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure want to cancel this booking?')"><i class="fa fa-close"></i> Cancel</button>
                     </a>
-                    <a href="{{route('detail.booking.kebaya', ['booking_id' => $data->booking_id])}}">
+                    <a href="{{route('pg.detail.booking', ['booking_id' => $data->booking_id])}}">
                       <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Complete</button>
                     </a>
                   </td> 
                   @elseif($data->booking_status == 'confirmed')
                   <td><h5><span class="badge badge-pill badge-success">On</span></h5></td> 
                   <td style="text-align: center;">
-                    <a href="{{route('detail.booking.kebaya', ['booking_id' => $data->booking_id])}}">
+                    <a href="{{route('pg.detail.booking', ['booking_id' => $data->booking_id])}}">
                       <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Complete</button>
                     </a>
                   </td>

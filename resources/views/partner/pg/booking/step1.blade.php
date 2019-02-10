@@ -10,7 +10,7 @@
                         <div class="col-md-12">
                             <div class="header">
                                 <h4 class="title">Offline Booking</h4>
-                                <p><span class="badge badge-primary">Step 1 : Pilih Kebaya</span> </p>
+                                <p><span class="badge badge-primary">Step 1 : Pilih Paket</span> </p>
                                 <p></p>
                             </div>
                             <div class="content">
@@ -21,28 +21,28 @@
                                       <div class="row">
                                         <div class="col-md-12">
                                           <div class="header">
-                                            <h5 style="text-align: center;">{{$data->name}}</h5>
+                                            <h5 style="text-align: center;">{{$data->pg_name}}</h5>
                                           </div>
                                           <div class="content">
 
                                             <div class="row">
                                               <div class="col-sm-12 col-md-12">
-                                                @if(File::exists(public_path("img_pkg/".$data->image.".jpg")))
-                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->image.'.jpg')  }}" alt= "Package Image" />
-                                                @elseif(File::exists(public_path("img_pkg/".$data->image.".jpeg")))
-                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->image.'.jpeg')  }}" alt= "Package Image" />
-                                                @elseif(File::exists(public_path("img_pkg/".$data->image.".png")))
-                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->image.'.png')  }}" alt= "Package Image" />
-                                                @elseif(File::exists(public_path("img_pkg/".$data->image.".JPG")))
-                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->image.'.JPG')  }}" alt= "Package Image" />
-                                                @elseif(File::exists(public_path("img_pkg/".$data->image.".JPEG")))
-                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->image.'.JPEG')  }}" alt= "Package Image" />
-                                                @elseif(File::exists(public_path("img_pkg/".$data->image.".PNG")))
-                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->image.'.PNG')  }}" alt= "Package Image" />
+                                                @if(File::exists(public_path("img_pkg/".$data->pg_img_1.".jpg")))
+                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pg_img_1.'.jpg')  }}" alt= "Package Image" />
+                                                @elseif(File::exists(public_path("img_pkg/".$data->pg_img_1.".jpeg")))
+                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pg_img_1.'.jpeg')  }}" alt= "Package Image" />
+                                                @elseif(File::exists(public_path("img_pkg/".$data->pg_img_1.".png")))
+                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pg_img_1.'.png')  }}" alt= "Package Image" />
+                                                @elseif(File::exists(public_path("img_pkg/".$data->pg_img_1.".JPG")))
+                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pg_img_1.'.JPG')  }}" alt= "Package Image" />
+                                                @elseif(File::exists(public_path("img_pkg/".$data->pg_img_1.".JPEG")))
+                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pg_img_1.'.JPEG')  }}" alt= "Package Image" />
+                                                @elseif(File::exists(public_path("img_pkg/".$data->pg_img_1.".PNG")))
+                                                <img style="height: auto; width: 100px; margin: 0 auto; float: none; position: relative;display: flex;" class="img-responsive" src="{{ asset('img_pkg/'.$data->pg_img_1.'.PNG')  }}" alt= "Package Image" />
                                                 @endif
                                               </div>
                                               <div class="col-sm-12 col-md-12" style="padding: 25px;">
-                                                <a href="{{route('kebaya.off-booking.step2', ['product_id' => $data->id])}}" >
+                                                <a href="{{route('pg.off-booking.step2', ['product_id' => $data->id])}}" >
                                                   <button type="submit" class="btn btn-primary" style="margin: 0 auto; float: none; position: relative;display: flex;">Pesan</button>
                                                 </a>
                                               </div>
