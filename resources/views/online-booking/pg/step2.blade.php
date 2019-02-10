@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Booking')
 @section('content')
-@include('online-booking.kebaya.cover-partner')
+@include('online-booking.pg.cover-partner')
 
 <!--===== STEP 2 : PILIH TANGGAL BOOKING ====-->
 

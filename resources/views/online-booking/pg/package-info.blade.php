@@ -152,62 +152,63 @@
                                         <td style="text-align: left;">Stylist</td>
                                         <td style="text-align: right;">{{$data->pg_stylist}}</td>
                                     </tr>
+                                        @if(Auth::check())
                                     <tr>
                                         <td style="text-align: left;">Price (1 Day)</td>
-                                        @if(Auth::check())
                                         <td style="text-align: right;">
                                             <p>Rp {{number_format($durasiPaket->durasi_harga,0,',','.')}}<br>({{$durasiPaket->durasi_jam}} Hour)</p>
                                         </td>
+                                    </tr>
                                         @else
-                                        <td style="text-align: right;">
-                                        <p>Biaya Sewa dapat dilihat jika sudah melakukan login</p>
-                                        </td>
+                                    <tr>
+                                        <td style="text-align: left;" colspan="2">Price (Full Day)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;" colspan="2"><small>Harga dapat dilihat jika sudah melakukan login</small></td>
+                                    </tr>
                                         @endif
-                                        
+                                        <td style="text-align: left;">Location</td>
+                                        <td style="text-align: right;">Max {{$data->pg_location_jumlah}} Location</td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: left;">Lokasi</td>
-                                        <td style="text-align: right;">{{$data->pg_location_jumlah}} Lokasi</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: left;">Exclusive Album</td>
                                         @if($data->pg_album_kolase == 'Include')
-                                        <td style="text-align: right;">Include</td>
+                                        <td style="text-align: left;" colspan="2">Exclusive Album</td>
                                         @else
+                                        <td style="text-align: left;">Exclusive Album</td>
                                         <td style="text-align: right;">Exclude</td>
                                         @endif
                                     </tr>
                                     @if($data->pg_album_kolase == 'Include')
                                     <tr>
-                                        <td colspan="2">{{$data->pg_album_ukuran}}, {{$data->pg_album_jumlah_foto}} Sheets, {{$data->pg_album_jumlah_hal}} Pages</td>
+                                        <td colspan="2" ><small>Include. ({{$data->pg_album_ukuran}} cm, {{$data->pg_album_jumlah_foto}} Photos, {{$data->pg_album_jumlah_hal}} Sheets)</small></td>
                                     </tr>
                                     @endif
                                     <tr>
-                                        <td style="text-align: left;">Printed Photo</td>
                                         @if($data->pg_printed == 'Include')
-                                        <td style="text-align: right;">Include</td>
+                                        <td style="text-align: left;" colspan="2">Printed Photo</td>
                                         @else
+                                        <td style="text-align: left;">Printed Photo</td>
                                         <td style="text-align: right;">Exclude</td>
                                         @endif
                                     </tr>
                                     @if($data->pg_printed == 'Include')
                                     <tr>
-                                        <td colspan="2">{{$data->pg_printed_size}}, {{$data->pg_printed_jumlah}} Photos, @if($data->pg_album_jumlah_frame == 'Include') + Frame
-                                        @endif
+                                        <td colspan="2"><small>Include. ({{$data->pg_printed_size}}, {{$data->pg_printed_jumlah}} Photos @if($data->pg_album_jumlah_frame == 'Include') + Frame
+                                        @endif)</small>
                                         </td>
                                     </tr>
                                     @endif
                                     <tr>
-                                        <td style="text-align: left;">Edited Photo</td>
                                         @if($data->pg_edited == 'Include')
-                                        <td style="text-align: right;">Include</td>
+                                        <td style="text-align: left;" colspan="2">Edited Photo</td>
                                         @else
+                                        <td style="text-align: left;">Edited Photo</td>
                                         <td style="text-align: right;">Exclude</td>
                                         @endif
                                     </tr>
                                     @if($data->pg_edited == 'Include')
                                     <tr>
-                                        <td colspan="2">{{$data->jumlah}} Photos, {{$data->pg_edited_saved}}
+                                        <td colspan="2"><small>Include. ({{$data->pg_edited_jumlah}} Photos, {{$data->pg_edited_saved}})</small>
                                         </td>
                                     </tr>
                                     @endif

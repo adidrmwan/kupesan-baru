@@ -31,16 +31,16 @@
                     <th colspan="2"></th>
                   </tr>
                   <tr>
-                    <th>Nama Studio</th>
+                    <th>Nama Partner</th>
                     <td>{{$data->partner_name}}</td>
                   </tr>
                   <tr>
-                    <th>Tanggal Pesan</th>
-                    <td>{{date('d F Y', strtotime($data->start_date))}}</td>
+                    <th>Tanggal Pemesanan</th>
+                    <td>{{date('l, d F Y', strtotime($data->start_date))}}</td>
                   </tr>
                   <tr>
-                    <th>Tanggal Pengembalian</th>
-                    <td>{{date('d F Y', strtotime($data->end_date))}}</td>
+                    <th>Waktu Pemesanan</th>
+                    <td>{{date('H:i A', strtotime($data->start_date))}}</td>
                   </tr>
                   <tr>
                     <th>Bukti Pembayaran</th>
@@ -64,26 +64,6 @@
                     <th>Harga Paket</th>
                     <th>Rp {{number_format($data->booking_price,0,',','.')}}</th>
                   </tr>
-                  <tr>
-                    <th>Deposit</th>
-                    <th>Rp {{number_format($data->deposit,0,',','.')}}</th>
-                  </tr>
-                  <tr>
-                    <th>Dryclean Cost</th>
-                    @if($data->price_dryclean == '0')
-                    <th>-</th>
-                    @else
-                    <th>Rp {{number_format($data->biaya_dry_clean,0,',','.')}}</th>
-                    @endif
-                  </tr>
-                  <tr>
-                    <th>Biaya Kirim</th>
-                    @if($data->flag == 'userku')
-                    <th>Rp {{number_format($data->biaya_kirim,0,',','.')}}</th>
-                    @else
-                    <th>-</th>
-                    @endif
-                  </tr>
                   <tr style="background-color: #4b75a7; color: white;">
                     <th>Total</th>
                     <th>Rp {{number_format($data->booking_total,0,',','.')}}</th>
@@ -95,18 +75,18 @@
           <div class="row">
             <div class=""></div>
             <div class="col-lg-12 pull-right" >
-              <a href="{{route('kebaya.cancel.bukti', ['id' => $data->booking_id])}}">
+              <a href="{{route('pg.cancel.bukti', ['id' => $data->booking_id])}}">
                 <button type="submit" class="btn btn-danger btn-xs" style=" padding: 3px 15px;"><span style="color: white; text-decoration: none;" onclick="return confirm('Are you sure want to cancel?')">Cancel</span>
                 </button>
               </a>
               @if($data->booking_status == 'confirmed')
               @else
-              <a href="{{route('kebaya.confirm.bukti', ['id' => $data->booking_id])}}">
+              <a href="{{route('pg.confirm.bukti', ['id' => $data->booking_id])}}">
                 <button type="submit" class="btn btn-success btn-xs" style=" padding: 3px 15px;"><span style="color: white; text-decoration: none;" onclick="return confirm('Are you sure want to confirm?')">Confirm</span>
                 </button>
               </a>
               @endif
-              <a href="{{route('list.booking.kebaya')}}">
+              <a href="{{route('pg.dashboard')}}">
                 <button type="submit" class="btn btn-primary btn-xs" style=" padding: 3px 15px;"><span style="color: white; text-decoration: none;">Back</span>
                 </button>
               </a>

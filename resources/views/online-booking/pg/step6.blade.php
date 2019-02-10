@@ -198,7 +198,7 @@
                             </ul>
                         </div><!-- end navbar collapse -->
 
-                        @include('online-booking.kebaya.package-info')
+                        @include('online-booking.pg.package-info')
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 content-side">        
                             @foreach($review as $data)
                             <div class="panel panel-default">
@@ -209,7 +209,7 @@
                                             <br>
                                             <div class="row">
                                               <div class="col-md-12">
-                                                 @include('online-booking.kebaya.table-detail-pesanan')
+                                                 @include('online-booking.pg.table-detail-pesanan')
                                               </div>
                                             </div>         
                                         </div>
@@ -224,7 +224,7 @@
                                     <label> By continuing, you are agree to the <a href="{{ route('term') }}">Terms & Condition</a></label>
                                 </div>
                                 <div class="checkbox col-xs-12 col-sm-12 col-md-4 col-lg-4"  >
-                                    <form role="form" action="{{ route('kebaya.step7') }}" method="post" enctype="multipart/form-data" class="lg-booking-form">
+                                    <form role="form" action="{{ route('pg.step7') }}" method="post" enctype="multipart/form-data" class="lg-booking-form">
                                     {{ csrf_field() }}
                                         <input type="text" name="bid" value="{{$bid}}" hidden="">
                                         <button type="submit" class="btn btn-orange" style="float: right;">Pesan</button>

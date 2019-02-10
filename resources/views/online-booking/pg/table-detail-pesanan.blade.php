@@ -7,45 +7,41 @@
   <div class="col-md-12">
     <table class="table">
       <tr>
-        <td>Tanggal Sewa</td>
-        <td>{{ date('d F Y', strtotime($data->start_date)) }} - {{ date('d F Y', strtotime($data->end_date)) }}</td>
+        <td>Tanggal Pemesanan</td>
+        <td>{{ date('l, d F Y', strtotime($data->start_date)) }}</td>
       </tr>
       <tr>
-        <td>Tipe / Set Paket</td>
-        <td>{{$data->category_name}} / {{$data->set}}</td>
+        <td>Waktu Pemesanan</td>
+        <td>{{ date('H:i A', strtotime($data->start_date)) }}</td>
       </tr>
       <tr>
-        <td>Ukuran</td>
-        <td>{{$data->size}}</td>
+        <td>Nama Paket</td>
+        <td>{{$package2->pg_name}}</td>
       </tr>
       <tr>
-        <td>Kuantitas Pesanan</td>
-        <td>{{$data->kuantitas}} pcs</td>
-      </tr>
-      <tr>
-        <th>Tanggal Penerimaan</th>
-        <th>{{ date('d F Y', strtotime($data->start_date)) }} <br>
-        @if($alamat_kirim->flag == 'partnerku')  
-          <h5 class="text-muted">Anda diharapkan untuk mengambil pesanan pada lokasi Partner-Ku di <br>
-            <b style="color: #EA410C;">{{$partner->pr_addr}}, {{$partner->pr_kel}}, {{$kecamatan->name}}, {{$kota->name}}, {{$provinsi->name}}, {{$partner->pr_postal_code}}</b> pada tanggal 
-            <b>{{ date('d F Y', strtotime($data->start_date)) }}</b>.<br>
-            Kontak <b>{{$data->partner_name}}</b> akan diberikan setelah menyelesaikan konfirmasi pembayaran.
-          </h5>
-        @elseif($alamat_kirim->flag == 'userku')
-          <h5 class="text-muted">Pesanan Anda akan dikirim dengan kurir JNE dan akan sampai di <br>
-            <b style="color: #EA410C;">{{$alamat_kirim->pr_addr}}, {{$alamat_kirim->pr_kel}}, {{$kecamatan_alamat->name}}, {{$kota_alamat->name}}, {{$provinsi_alamat->name}}, {{$partner->pr_postal_code}}</b> pada tanggal 
-            <b>{{ date('d F Y', strtotime($data->start_date)) }}</b>.
-          </h5>
-        @endif
-        </th>
-      </tr>
-      <tr>
-        <th>Tanggal Penerimaan</th>
-        <th>{{ date('d F Y', strtotime($data->end_date)) }}</th>
+        <td>MUA / Stylist</td>
+        <td>{{$package2->pg_mua}} / {{$package2->pg_stylist}}</td>
       </tr>
     </table>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-12">
+    <h5><b>Detail Lokasi</b></h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+      @foreach($pglog as $key => $value)
+      <tr>
+        <td><small>Lokasi {{$key+1}} : {{$value->loc_name}} - {{$value->loc_addr}}</small></td>
+      </tr>
+      @endforeach
+    </table>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
     <h5><b>Harga</b></h5>
@@ -55,34 +51,13 @@
   <div class="col-md-12">
     <table class="table">
       <tr>
-        <td>Harga Paket</td>
+        <td>Harga Paket ({{$durasiPaket->durasi_jam}} Jam)</td>
         <td>Rp. {{number_format($data->booking_price, 0, ',', '.')}}</td>
       </tr>
       <tr>
-        <td>Deposit</td>
-        <td>Rp. {{number_format($data->deposit, 0, ',', '.')}}</td>
-      </tr>
-      @if($data->price_dryclean != '0')
-      <tr>
-        <td>Dryclean Cost</td>
-        <td>Rp. {{number_format($data->biaya_dry_clean, 0, ',', '.')}}</td>
-      </tr>
-      @endif
-      @if($alamat_kirim->flag == 'userku')
-      <tr>
-        <td>Biaya Pengiriman</td>
-        <td>Rp. {{number_format($data->biaya_kirim, 0, ',', '.')}}</td>
-      </tr>
-      <tr>
         <th>Total</th>
         <th>Rp. {{number_format($data->booking_total, 0, ',', '.')}}</th>
       </tr>
-      @else
-      <tr>
-        <th>Total</th>
-        <th>Rp. {{number_format($data->booking_total, 0, ',', '.')}}</th>
-      </tr>
-      @endif
     </table>
   </div>
 </div>

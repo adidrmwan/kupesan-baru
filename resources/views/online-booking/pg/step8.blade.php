@@ -166,7 +166,7 @@
                                             <div class="panel-heading"><h4>Upload Bukti</h4></div>
                                             <div class="panel-body">
                                                 <div class="row"> 
-                                                    <form role="form" action="{{ route('kebaya.upload.bukti') }}" method="post" enctype="multipart/form-data">
+                                                    <form role="form" action="{{ route('pg.upload.bukti') }}" method="post" enctype="multipart/form-data">
                                                     {{ csrf_field() }}                                                   
                                                         <div class="col-sm-12 col-md-12  user-detail">
                                                             <h4><b>Silahkan Mengupload Bukti Transfer</b></h4>

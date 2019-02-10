@@ -15,6 +15,7 @@ use App\Regencies;
 use App\Districts;
 use App\Villages;
 use App\KebayaBooking;
+use App\PGBooking;
 use App\KebayaProduct;
 use App\PartnerDurasi;
 class CustomerController extends Controller
@@ -23,8 +24,8 @@ class CustomerController extends Controller
     {
         $user_id = Auth::user()->id;
         $user = User::where('id', $user_id)->select('first_name', 'last_name', 'email', 'phone_number')->get();
-        // dd($user);
 
+        //sedang proses
         $pesanan_unapprove = Booking::where('booking.user_id', $user_id)
                     ->join('ps_package','booking.package_id','=', 'ps_package.id')
                     ->select(DB::raw('booking.*, ps_package.pkg_name_them, ps_package.pkg_category_them, booking_total as total'))
@@ -35,6 +36,11 @@ class CustomerController extends Controller
                     ->join('kebaya_booking_address', 'kebaya_booking_address.booking_id', '=', 'kebaya_booking.booking_id')
                     ->where('kebaya_booking.booking_status', '=', 'un_approved')
                     ->get();
+        $pg_unapproved = PGBooking::where('pg_booking.user_id', $user_id)
+                    ->join('pg_package','pg_booking.package_id','=', 'pg_package.id')
+                    ->where('pg_booking.booking_status', '=', 'un_approved')
+                    ->get();
+
         $pesanan_approved = Booking::where('booking.user_id', $user_id)
                     ->join('ps_package','booking.package_id','=', 'ps_package.id')
                     ->select(DB::raw('booking.*, ps_package.pkg_name_them, ps_package.pkg_category_them, booking_total as total'))
@@ -44,6 +50,10 @@ class CustomerController extends Controller
                     ->join('kebaya_product','kebaya_booking.package_id','=', 'kebaya_product.id')
                     ->join('kebaya_booking_address', 'kebaya_booking_address.booking_id', '=', 'kebaya_booking.booking_id')
                     ->where('kebaya_booking.booking_status', '=', 'approved')
+                    ->get();
+        $pg_approved = PGBooking::where('pg_booking.user_id', $user_id)
+                    ->join('pg_package','pg_booking.package_id','=', 'pg_package.id')
+                    ->where('pg_booking.booking_status', '=', 'approved')
                     ->get();
 
         $pesanan_pembayaran = Booking::where('booking.user_id', $user_id)
@@ -56,6 +66,10 @@ class CustomerController extends Controller
                     ->join('kebaya_booking_address', 'kebaya_booking_address.booking_id', '=', 'kebaya_booking.booking_id')
                     ->where('kebaya_booking.booking_status', '=', 'on_pembayaran')
                     ->get();
+        $pg_pembayaran = PGBooking::where('pg_booking.user_id', $user_id)
+                    ->join('pg_package','pg_booking.package_id','=', 'pg_package.id')
+                    ->where('pg_booking.booking_status', '=', 'on_pembayaran')
+                    ->get();
 
         $pesanan_paid = Booking::where('booking.user_id', $user_id)
                     ->join('ps_package','booking.package_id','=', 'ps_package.id')
@@ -67,6 +81,10 @@ class CustomerController extends Controller
                     ->join('kebaya_booking_address', 'kebaya_booking_address.booking_id', '=', 'kebaya_booking.booking_id')
                     ->where('kebaya_booking.booking_status', '=', 'paid')
                     ->get();
+        $pg_paid = PGBooking::where('pg_booking.user_id', $user_id)
+                    ->join('pg_package','pg_booking.package_id','=', 'pg_package.id')
+                    ->where('pg_booking.booking_status', '=', 'paid')
+                    ->get();
 
         $pesanan_confirmed = Booking::where('booking.user_id', $user_id)
                     ->join('ps_package','booking.package_id','=', 'ps_package.id')
@@ -77,6 +95,10 @@ class CustomerController extends Controller
                     ->join('kebaya_product','kebaya_booking.package_id','=', 'kebaya_product.id')
                     ->join('kebaya_booking_address', 'kebaya_booking_address.booking_id', '=', 'kebaya_booking.booking_id')
                     ->where('kebaya_booking.booking_status', '=', 'confirmed')
+                    ->get();
+        $pg_confirmed = PGBooking::where('pg_booking.user_id', $user_id)
+                    ->join('pg_package','pg_booking.package_id','=', 'pg_package.id')
+                    ->where('pg_booking.booking_status', '=', 'confirmed')
                     ->get();
 
         $riwayat = Booking::where('booking.user_id', $user_id)
@@ -91,7 +113,7 @@ class CustomerController extends Controller
                     ->get();
 
         $biayaKirim = '10000';
-        return view('user.dashboard', ['user' => $user, 'pesanan_pembayaran' => $pesanan_pembayaran, 'pesanan_paid' => $pesanan_paid, 'pesanan_confirmed' => $pesanan_confirmed, 'riwayat' => $riwayat], compact('pesanan_unapprove', 'pesanan_approved', 'kebaya_unapproved', 'kebaya_approved', 'kebaya_pembayaran', 'kebaya_paid', 'kebaya_confirmed', 'kebaya_riwayat', 'biayaKirim'));
+        return view('user.dashboard', ['user' => $user, 'pesanan_pembayaran' => $pesanan_pembayaran, 'pesanan_paid' => $pesanan_paid, 'pesanan_confirmed' => $pesanan_confirmed, 'riwayat' => $riwayat], compact('pesanan_unapprove', 'pesanan_approved', 'kebaya_unapproved', 'kebaya_approved', 'kebaya_pembayaran', 'pg_unapproved', 'pg_approved', 'pg_pembayaran', 'pg_paid', 'pg_confirmed', 'kebaya_paid', 'kebaya_confirmed', 'kebaya_riwayat', 'biayaKirim'));
     }
 
     public function showInfo(Request $request) {

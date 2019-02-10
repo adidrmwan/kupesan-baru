@@ -14,10 +14,11 @@ Route::group(['middleware' => ['auth','role:partner']], function(){
         Route::resource('pg-package', 'PackageController');
         Route::get('/pg-package/delete', 'PackageController@deletePackage')->name('delete.pg.package');
         Route::group(['prefix' => 'pg'], function(){
+            Route::get('dashboard', 'PartnerController@dashboard')->name('pg.dashboard');
             Route::get('profile', 'PartnerController@profile')->name('pg.profile');
             Route::post('profile', 'PartnerController@updateProfile')->name('pg.profile.update');
-
-
+            Route::get('approve/booking', 'AdminController@approveBooking')->name('pg.partner.approve.booking');
+            Route::get('cancel/booking', 'PartnerController@cancelBooking')->name('pg.partner.cancel.booking');
         });
 
     });

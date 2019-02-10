@@ -147,7 +147,7 @@
                                                        @elseif($data->booking_status == 'confirmed')
                                                        <h3>Pesanan mu sudah dikonfirmasi.</h3>
                                                        @endif
-                                                       <p>Terima kasih telah melakukan pemesanan melalui KUPESAN.ID,<br>Mohon menunggu Kode Booking anda selama kurang lebih 30 menit dan akan dikirimkan ke-email dan nomor handphone yang terdaftar. Terima Kasih.</p>
+                                                       <p>Terima kasih telah melakukan pemesanan melalui KUPESAN.ID,<br>Mohon menunggu Kode Booking anda selama kurang lebih 30 menit dan akan dikirimkan ke-email dan nomor handphone yang terdaftar.</p>
                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"  >
                                                         <a href="{{route('index')}}">
                                                             <button type="submit" class="btn btn-orange pull-left" style="float: right;">Selesai</button>
@@ -176,38 +176,18 @@
                                                             <div class="table-responsive">
                                                                 <table class="table">
                                                                     <tbody>
-                                                                        <!-- <tr>
-                                                                            <td>Kode pesanan:</td>
-                                                                            <td></td>
-                                                                        </tr> -->
                                                                         <tr>
                                                                             <td>Nama Partner:</td>
                                                                             <td>{{$data->partner_name}}</td>
                                                                         </tr>
-                                                                        <tr>
-                                                                            <td>Nama Pemesan:</td>
-                                                                            <td>{{$data->user_name}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Tanggal Pesan:</td>
-                                                                            <td>{{ date('d F Y', strtotime($data->start_date)) }}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Tanggal Pengembalian:</td>
-                                                                            <td>{{ date('d F Y', strtotime($data->end_date)) }}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Tipe Paket</td>
-                                                                            <td>{{$data->category_name}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Set Paket</td>
-                                                                            <td>{{$data->set}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Ukuran</td>
-                                                                            <td>{{$data->size}}</td>
-                                                                        </tr>
+                                                                      <tr>
+                                                                        <td>Tanggal Pemesanan</td>
+                                                                        <td>{{ date('l, d F Y', strtotime($data->start_date)) }}</td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>Waktu Pemesanan</td>
+                                                                        <td>{{ date('H:i A', strtotime($data->start_date)) }}</td>
+                                                                      </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div><!-- end table-responsive -->

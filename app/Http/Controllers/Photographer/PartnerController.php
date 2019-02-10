@@ -6,18 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use App\FasilitasPartner;
-use App\PartnerDurasi;
-use App\KebayaBooking;
-use App\KebayaUkuran;
-use App\BookingCheck;
-use App\Fasilitas;
+use App\PGLocationAddress;
+use App\PGPackage;
+use App\Partner;
+use App\PGDurasi;
+use App\PGCheck;
+use App\PGBooking;
 use App\Provinces;
 use App\Regencies;
 use App\Districts;
 use App\Villages;
 use App\Booking;
-use App\Partner;
 use App\PSPkg;
 use App\Jam;
 use App\User;
@@ -37,9 +36,26 @@ class PartnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function dashboard()
     {
-        //
+        $user = Auth::user();
+        $partner = DB::table('partner')
+                    ->where('user_id',$user->id)
+                    ->select('*')
+                    ->first();
+
+        if (empty($partner->pr_name)) {
+            return redirect()->intended(route('partner.profile.form'));
+        }
+
+        $booking_unapprove = PGBooking::join('pg_package', 'pg_package.id', '=', 'pg_booking.package_id')
+                            ->where('pg_booking.booking_status', 'un_approved')
+                            ->where('pg_package.partner_id', $user->id)
+                            ->select('pg_booking.booking_id', 'pg_booking.user_id', 'pg_booking.package_id','pg_package.pg_name', 'pg_package.pg_mua', 'pg_package.pg_stylist', 'pg_package.pg_location_jumlah', 'pg_booking.start_date', 'pg_booking.booking_price', 'pg_booking.booking_total', 'pg_booking.updated_at')
+                            ->orderBy('pg_booking.updated_at', 'desc')
+                            ->get();
+        
+        return view('partner.home', ['partner' => $partner], compact('booking_unapprove'));
     }
 
     /**
@@ -183,6 +199,49 @@ class PartnerController extends Controller
             $logo->save();
         }
         return redirect()->intended(route('pg.profile'));
+    }
+
+    public function bookingActivationPG($token)
+    {
+      $check = DB::table('booking_activations_pg')->where('token',$token)->first();
+      if(!is_null($check)){
+        $user = User::find($check->id_user);
+        $bid = $check->booking_id;
+
+        if ($user->is_activated == 1){
+            if(Auth::check()) {
+                return redirect()->route('partner.dashboard');
+            } else {
+                return redirect()->route('mitra.login');
+            }
+        }
+
+        $user->update(['is_activated' => 1]);
+
+        return redirect()->route('partner.dashboard');
+      }
+      return redirect()->to('home')->with('Warning',"Your token is invalid");
+    } 
+
+    public function cancelBooking(Request $request)
+    {
+        $booking_id = $request->id;
+        $booking = PGBooking::find($booking_id);
+
+        $book = PGBooking::where('booking_id', $booking_id)->select('booking_id')->first()->toArray();
+        $user = PGBooking::join('users', 'users.id', '=', 'pg_booking.user_id')
+                ->join('pg_package', 'pg_package.id', '=', 'pg_booking.package_id')
+                ->where('pg_booking.booking_id', $booking_id)
+                ->first()->toArray();
+        Mail::send('emails.booking-cancel-pg', $user, function($message) use ($user){
+          $message->to($user['email']);
+          $message->subject('Kupesan.id | Pesanan Tidak Tersedia');
+        });
+        
+        $booking->booking_status = 'canceled_by_partner';
+        $booking->save();
+
+        return redirect()->back();
     }
 
 }

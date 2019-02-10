@@ -74,6 +74,10 @@ class PartnerController extends Controller
             return view('partner.home', ['partner' => $partner], compact('booking_unapprove', 'biayaKirim'));
         }
 
+        if ($partner->pr_type == '2') {
+            return redirect()->intended(route('pg.dashboard'));
+        }
+
 
         return view('partner.home', ['partner' => $partner]);
     }

@@ -147,7 +147,7 @@
                                                        @elseif($data->booking_status == 'confirmed')
                                                        <h3>Pesanan mu sudah dikonfirmasi.</h3>
                                                        @endif
-                                                       <p>Terima kasih telah melakukan pemesanan melalui KUPESAN.ID,<br>Mohon menunggu Kode Booking anda selama kurang lebih 30 menit dan akan dikirimkan ke-email dan nomor handphone yang terdaftar. Terima Kasih.</p>
+                                                       <p>Terima kasih telah melakukan pemesanan melalui KUPESAN.ID,<br>Mohon menunggu Kode Booking anda selama kurang lebih 30 menit dan akan dikirimkan ke-email dan nomor handphone yang terdaftar.</p>
                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"  >
                                                         <a href="{{route('index')}}">
                                                             <button type="submit" class="btn btn-orange pull-left" style="float: right;">Selesai</button>
@@ -183,10 +183,6 @@
                                                                         <tr>
                                                                             <td>Nama Partner:</td>
                                                                             <td>{{$data->partner_name}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Nama Pemesan:</td>
-                                                                            <td>{{$data->user_name}}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Tanggal Pesan:</td>

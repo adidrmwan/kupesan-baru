@@ -60,8 +60,10 @@ Route::get('/partner/activation/2/{token}', 'MitraAuth\RegisterController@userAc
 Route::get('/partner/activation/{token}', 'AdminController@partnerActivation');
 Route::get('/partner/dashboard/{token}', 'PartnerController@bookingActivation');
 Route::get('/partner/dashboard/busana/{token}', 'PartnerController@bookingActivationBusana');
+Route::get('/partner/dashboard/pg/{token}', 'Photographer\PartnerController@bookingActivationPG');
 Route::get('/booking/approved/{token}', 'AdminController@bookingActivation');
 Route::get('/booking/approved/busana/{token}', 'AdminController@bookingActivationKebaya');
+Route::get('/booking/approved/pg/{token}', 'Photographer\AdminController@bookingActivation');
 
 
 // Route untuk user yang member
@@ -109,6 +111,14 @@ Route::group(['prefix' => '2', 'middleware' => ['auth','role:user']], function()
             Route::post('2a', 'BookingController@submitStep2a')->name('pg.submit.step2a');
             Route::get('3', 'BookingController@step3')->name('pg.step3');
             Route::post('3', 'BookingController@submitStep3')->name('pg.submit.step3');
+            Route::get('4', 'BookingController@step4')->name('pg.step4');
+            Route::post('4', 'BookingController@submitStep4')->name('pg.submit.step4');
+            Route::get('6', 'BookingController@step6')->name('pg.step6');
+            Route::post('7', 'BookingController@step7')->name('pg.step7');
+            Route::post('8', 'BookingController@step8')->name('pg.step8');
+            Route::post('9', 'BookingController@uploadBukti')->name('pg.upload.bukti');
+            Route::get('9', 'BookingController@step9')->name('pg.step9');
+            Route::post('info', 'CustomerController@showKebayaInfo')->name('pg.booking.info');
         });
 
     });

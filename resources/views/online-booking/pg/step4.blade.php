@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Booking')
 @section('content')
-@include('online-booking.kebaya.cover-partner')
+@include('online-booking.pg.cover-partner')
 
 <!--===== STEP 2 : PILIH TANGGAL BOOKING ====-->
 
@@ -9,8 +9,8 @@
     <div id="booking" class="innerpage-section-padding">
         <div class="container">
             <div class="row">
-                @include('online-booking.kebaya.package-info')
-                <form role="form" action="{{ route('kebaya.submit.step4') }}" method="post" enctype="multipart/form-data" class="lg-booking-form">
+                @include('online-booking.pg.package-info')
+                <form role="form" action="{{ route('pg.submit.step4') }}" method="post" enctype="multipart/form-data" class="lg-booking-form">
                 {{ csrf_field() }}
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 content-side">
                     <div class="panel panel-default">
@@ -22,7 +22,7 @@
                                       <div class="row">
                                         <div class="col-md-12">
                                           @foreach($detail_pesanan as $data)
-                                           @include('online-booking.kebaya.table-detail-pesanan')
+                                           @include('online-booking.pg.table-detail-pesanan')
                                           @endforeach
                                         </div>
                                       </div>         

@@ -339,7 +339,7 @@ class AdminController extends Controller
         $booking_id = $request->id;
         $booking = KebayaBooking::find($booking_id);
         
-        $user = Booking::join('users', 'users.id', '=', 'booking.user_id')
+        $user = KebayaBooking::join('users', 'users.id', '=', 'booking.user_id')
                 ->join('ps_package', 'ps_package.id', '=', 'booking.package_id')
                 ->where('booking.booking_id', $booking_id)
                 ->first()->toArray();

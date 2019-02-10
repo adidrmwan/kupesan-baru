@@ -119,6 +119,11 @@
           </a>
         </li>
         <li class="">
+          <a href="{{route('pg-booking.index')}}">
+            <i class="fa fa-camera"></i> <span>Fotografer</span>
+          </a>
+        </li>
+        <li class="">
           <a href="{{route('show.free.spot')}}">
             <i class="fa fa-building"></i> <span>Free Spot</span>
           </a>

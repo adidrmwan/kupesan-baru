@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Booking')
 @section('content')
-@include('online-booking.kebaya.cover-partner')
+@include('online-booking.pg.cover-partner')
 
 <!--===== STEP 2 : PILIH TANGGAL BOOKING ====-->
 
@@ -33,7 +33,7 @@
                                             <div class="row">
                                               <div class="col-md-12"> 
                                                 <div class="form-group">
-                                                  <label>Tanggal Pemotretan</label>
+                                                  <label>Tanggal Pemesanan</label>
                                                   <input type="text" class="form-control text-center" value="{{ date('d M Y', strtotime($tanggalPenyewaan)) }}" disabled="">
                                                 </div>
                                               </div>
@@ -41,7 +41,7 @@
                                             <hr>
                                             <div class="row">
                                               <div class="col-md-12">
-                                                <p style="text-align: center;">Masukkan lokasi pemotretan, maksimal <b style="color: #EA410C;">{{$makslokasi}} lokasi.</b></p>
+                                                <p style="text-align: center;">Masukkan lokasi, maksimal <b style="color: #EA410C;">{{$makslokasi}} lokasi.</b></p>
                                               </div>
                                             </div>
             @for ($i = 1; $i <= $makslokasi; $i++)

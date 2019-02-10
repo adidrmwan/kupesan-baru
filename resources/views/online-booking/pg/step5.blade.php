@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title', 'Booking')
 @section('content')
-@include('online-booking.kebaya.cover-partner')   
+@include('online-booking.pg.cover-partner')   
 <!--===== INNERPAGE-WRAPPER ====-->
 <section class="innerpage-wrapper">
 	<div id="booking" class="innerpage-section-padding">
         <div class="container">
             <div class="row">
-                @include('online-booking.kebaya.package-info')
+                @include('online-booking.pg.package-info')
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 content-side">
                     <div class="panel panel-default">
                         <div class="panel-heading"><h4>Pesanan-KU</h4></div>

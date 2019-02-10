@@ -357,7 +357,7 @@ class SearchController extends Controller
         }
         
         if(!empty($allThemes[0]) || !empty($freespot[0])) {
-            return view('search-result.pg.daftar', ['allThemes' => $allThemes], compact('tag_id', 'tema', 'listtema', 'freespot'));
+            return view('search-result.pg.daftar', ['allThemes' => $allThemes], compact('tag_id', 'tema', 'listtema'));
         } else {
             return view('search-result.pg.notfound', ['allThemes' => $allThemes], compact('tag_id', 'tema', 'listtema'));
         }

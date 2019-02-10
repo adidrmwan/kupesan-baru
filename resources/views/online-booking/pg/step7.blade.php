@@ -256,7 +256,7 @@
 
                                                         <span style="text-align: center;">
                                                             <h5>Transfer dapat dilakukan sebelum</h5>
-                                                            <h4><b>{{ date('d F Y', strtotime($data->booking_at)) }}, {{ date('H:i:s', strtotime($data->booking_at)) }} WIB</b></h4>
+                                                            <h4><b>{{ date('l, d F Y', strtotime($data->booking_at)) }}<br>{{ date('H:i:s A', strtotime($data->booking_at)) }} WIB</b></h4>
                                                             <h5>atau pembayaran Anda otomatis dibatalkan oleh sistem.</h5>
                                                         </span>
                                                         <hr class="style5">
@@ -281,7 +281,7 @@
                             
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-7 col-lg-12 content-side">
-                                <form role="form" action="{{ route('kebaya.step8') }}" method="post" enctype="multipart/form-data" class="lg-booking-form">
+                                <form role="form" action="{{ route('pg.step8') }}" method="post" enctype="multipart/form-data" class="lg-booking-form">
                             {{ csrf_field() }}
                                     <div class="checkbox col-xs-12 col-sm-12 col-md-6 col-lg-4"  >
                                         <label> By continuing, you are agree to the <a href="{{ route('term') }}">Terms & Condition</a></label>
