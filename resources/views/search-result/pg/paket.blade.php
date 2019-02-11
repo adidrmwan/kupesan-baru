@@ -46,7 +46,6 @@
         </div>
         <div class = "details" >
             <br>
-            <br>
             <p style="text-align:center; color: white;">
                 <b>MUA</b> : {{$data->pg_mua}}<br>
                 <b>Stylist</b> : {{$data->pg_stylist}}<br>
