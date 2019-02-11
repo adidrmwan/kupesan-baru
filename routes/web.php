@@ -37,6 +37,7 @@ Route::get('/', function () {
 Route::get('detail/partner/spotfoto', 'StudioController@detailFotostudio')->name('detail.fotostudio');
 Route::get('detail/partner/busana', 'StudioController@detailKebaya')->name('detail.kebaya');
 Route::get('detail/partner/freespot', 'StudioController@detailFreeSpot')->name('detail.freespot');
+Route::get('detail/partner/fotografer', 'StudioController@detailFotografer')->name('detail.fotografer');
 
 
 Route::get('detail/partner/spotfoto/paket', 'StudioController@detailPaketSpot')->name('detail.paket.spot');

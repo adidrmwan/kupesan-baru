@@ -93,7 +93,7 @@
                 </a>
             </li><br>
             <li>
-                <a href="{{route('detail.fotostudio', ['id' => $data->user_id])}}">
+                <a href="{{route('detail.fotografer', ['id' => $data->partner_id])}}">
                     <button type="submit" class="btn btn-pink" style=" padding: 5px 15px; margin-top: 6px;"><span style="color: white; text-decoration: none;">View More</span>
                     </button>
                 </a>

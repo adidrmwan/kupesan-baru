@@ -15,6 +15,7 @@ use App\KebayaProduct;
 use App\Tnc;
 use App\SpotAddress;
 use App\SpotFacilities;
+use App\PGPackage;
 
 class StudioController extends Controller
 {
@@ -82,6 +83,28 @@ class StudioController extends Controller
         return view('partner-profile.kebaya.detail', ['detail' => $detail, 'album' => $album, 'fasilitas' => $fasilitas, 'booking_date' => $booking_date], compact('provinsi', 'kota', 'kecamatan', 'setelan', 'atasan', 'bawahan', 'tnc'));
     }
     
+    public function detailFotografer(Request $request)
+    {
+        $user_id = $request->id;
+        $booking_date = $request->booking_date;
+        $detail = Partner::where('user_id', $user_id)->get();
+        $partner = Partner::where('user_id', $user_id)->first();
+        // dd($request);
+        $provinsi = Provinces::where('id', $partner->pr_prov)->get();
+        $kota = Regencies::where('id', $partner->pr_kota)->first();
+        $kecamatan = Districts::where('id', $partner->pr_kec)->first();
+        $fasilitas = FasilitasPartner::where('user_id', $user_id)->get();
+        $tnc = Tnc::where('partner_id', $user_id)->get();
+        $album = Album::where('user_id', $user_id)->get();
+
+        
+        $AllFotografer = PGPackage::where('partner_id', $user_id)
+                    ->where('status', '1')
+                    ->get();
+
+        return view('partner-profile.fotografer.detail', ['detail' => $detail, 'album' => $album, 'fasilitas' => $fasilitas, 'booking_date' => $booking_date], compact('provinsi', 'kota', 'kecamatan','AllFotografer', 'tnc'));
+    }
+
     public function detailFreeSpot(Request $request)
     {
     	$user_id = $request->id;
@@ -100,6 +123,8 @@ class StudioController extends Controller
                     ->get();
         return view('partner-profile.freespot.detail', ['detail' => $detail, 'album' => $album, 'booking_date' => $booking_date], compact('provinsi', 'kota', 'kecamatan', 'allspot'));
     }
+
+    
     
     public function detailPaketSpot(Request $request)
     {

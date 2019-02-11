@@ -71,6 +71,15 @@
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".jpeg")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_1.'.jpeg')  }}" title="image-1" class="with-caption gallery image-link">
                                                     <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".JPG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_1.'.JPG')  }}" title="image-1" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.JPG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".JPEG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_1.'.JPEG')  }}" title="image-1" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.JPEG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_1.".PNG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_1.'.PNG')  }}" title="image-1" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_1.'.PNG')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @endif
                                                 </div>
@@ -93,6 +102,16 @@
                                                     <a href="{{ asset('album/'.$listalbum->album_img_2.'.jpeg')  }}" title="image-2" class="with-caption gallery image-link">
                                                     <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_2.".JPG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_2.'.JPG')  }}" title="image-2" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.JPG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_2.".JPEG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_2.'.JPEG')  }}" title="image-2" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.JPEG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_2.".PNG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_2.'.PNG')  }}" title="image-2" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_2.'.PNG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    </a>
                                                     @endif
                                                 </div>
                                             </div><!-- end hotel-block -->
@@ -114,6 +133,16 @@
                                                     <a href="{{ asset('album/'.$listalbum->album_img_3.'.jpeg')  }}" title="image-3" class="with-caption gallery image-link">
                                                     <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_3.".JPG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_3.'.JPG')  }}" title="image-3" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.JPG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_3.".JPEG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_3.'.JPEG')  }}" title="image-3" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.JPEG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_3.".PNG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_3.'.PNG')  }}" title="image-3" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_3.'.PNG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    </a>
                                                     @endif
                                               </div>
                                             </div><!-- end hotel-block -->
@@ -134,6 +163,16 @@
                                                     @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".jpeg")))
                                                     <a href="{{ asset('album/'.$listalbum->album_img_4.'.jpeg')  }}" title="image-4" class="with-caption gallery image-link">
                                                     <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.jpg')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    </a>
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".JPG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_4.'.JPG')  }}" title="image-4" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.JPG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".JPEG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_4.'.JPEG')  }}" title="image-4" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.JPEG')  }}" alt= "Album / Portofolio Bisnis" />
+                                                    @elseif(File::exists(public_path("album/".$listalbum->album_img_4.".PNG")))
+                                                    <a href="{{ asset('album/'.$listalbum->album_img_4.'.PNG')  }}" title="image-4" class="with-caption gallery image-link">
+                                                    <img style="width: 500px; height: auto;" class="img-responsive" src="{{ asset('album/'.$listalbum->album_img_4.'.PNG')  }}" alt= "Album / Portofolio Bisnis" />
                                                     </a>
                                                     @endif
                                                 </div>
@@ -201,43 +240,20 @@
             </div>
                  
             <div class="col-sm-6 col-md-6">
-                @if(!empty($carte[0])) 
-                <section id="thematic-offers" class="">
-                    <div class="col-lg-12">
-                        <div class="page-heading">
-                          <h2 style="font-family: 'Italianno', cursive; font-size: 50px; background: linear-gradient(#FE9321, #FF6E6D);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;">A La Carte</h2>
-                          <hr class="heading-line"/>
-                        </div>
-                        
-                        <div class="owl-carousel owl-theme owl-custom-arrow" id="owl-thematic-offers">
-                          <!-- <ul class="list-unstyled list-inline offer-price-1"> -->
-                          @foreach($carte as $listthem)    
-                            <!-- <li class=""> -->
-                                @include('partner-profile.fotostudio.paket')                                             
-                            <!-- </li> -->
-                          @endforeach
-                          <!-- </ul> -->
-                        </div>
-                    </div>
-                </section>
-                @endif
-                
-                @if(!empty($spack[0])) 
+                @if(!empty($AllFotografer[0])) 
                 <section id="alacarte-offers" class="">
                     <div class="col-lg-12">
                         <div class="page-heading">
-                            <h2 style="font-family: 'Italianno', cursive; font-size: 50px; background: linear-gradient(#FE9321, #FF6E6D);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;">Special Package </h2>
+                            <h2 style="font-family: 'Italianno', cursive; font-size: 50px; background: linear-gradient(#FFBD54, #FF6E6D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">Fotografer</h2>
                             <hr class="heading-line" />
                         </div>
                         <div class="owl-carousel owl-theme owl-custom-arrow" id="owl-alacarte-offers">
                           <!-- <ul class="list-unstyled list-inline offer-price-1"> -->
-                          @foreach($spack as $listthem)    
+                          @foreach($AllFotografer as $listthem)    
                             <!-- <li class="price"> -->
-                                @include('partner-profile.fotostudio.paket')
+                                @include('partner-profile.fotografer.paket')
                             <!-- </li> -->
                             @endforeach
                           <!-- </ul> -->
@@ -245,31 +261,7 @@
                     </div>
                 </section>
                 @endif
-                
-                @if(!empty($studio[0])) 
-                <section id="special-offers" class="">
-                    <div class="col-lg-12">
-                        <div class="page-heading">
-                            <h2 style="font-family: 'Italianno', cursive; font-size: 50px; background: linear-gradient(#FE9321, #FF6E6D);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;">Special Studio</h2>
-                            <hr class="heading-line" />
-                        </div><!-- end page-heading -->
-                        
-                        <div class="owl-carousel owl-theme owl-custom-arrow" id="owl-special-offers">
-                              <!-- <ul class="list-unstyled list-inline offer-price-1"> -->
-                              @foreach($studio as $listthem)    
-                                <!-- <li class="price"> -->
-                                  @include('partner-profile.fotostudio.paket')
-                                <!-- </li> -->
-                              @endforeach
-                            <!-- </ul> -->
-                            
-                        </div>
-                    </div>
-                </section>
-                @endif
-          </div>
+            </div>
     </div>
   </section>
 
