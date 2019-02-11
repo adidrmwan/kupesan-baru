@@ -30,7 +30,7 @@
           
           <div class="main-mask">
             <ul class="list-unstyled list-inline offer-price-1" style="text-align:center;">
-                <li class="price" style="color: white;">{{$listthem->pkg_name_them}}</li>
+                <li class="price" style="color: white;">{{$listthem->pg_name}}</li>
             </ul>
           </div>
       </div>
